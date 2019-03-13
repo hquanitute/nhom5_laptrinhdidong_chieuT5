@@ -9,7 +9,10 @@ public class ButtonEvents {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tView.setText(tView.getText().toString() + button.getText());
+                if (tView.getText().equals("0"))
+                    tView.setText(button.getText());
+                else
+                    tView.setText(tView.getText().toString() + button.getText());
             }
         });
     }

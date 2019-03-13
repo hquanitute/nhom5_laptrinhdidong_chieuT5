@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
             buttonDot, buttonPercent, buttonSqrt, buttonSqr, buttonFraction;
     ImageButton buttonDel;
     TextView resultView, expressionView;
-    double mValueOne, mValueTwo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,86 +52,46 @@ public class MainActivity extends AppCompatActivity {
         ButtonEvents btnEvent = new ButtonEvents();
         btnEvent.ClickOnNumberButton(button0, resultView);
         btnEvent.ClickOnNumberButton(button1, resultView);
-        button2.setOnClickListener(new View.OnClickListener() {
+        btnEvent.ClickOnNumberButton(button2, resultView);
+        btnEvent.ClickOnNumberButton(button3, resultView);
+        btnEvent.ClickOnNumberButton(button4, resultView);
+        btnEvent.ClickOnNumberButton(button5, resultView);
+        btnEvent.ClickOnNumberButton(button6, resultView);
+        btnEvent.ClickOnNumberButton(button7, resultView);
+        btnEvent.ClickOnNumberButton(button8, resultView);
+        btnEvent.ClickOnNumberButton(button9, resultView);
+        btnEvent.ClickOnNumberButton(buttonAdd, resultView);
+        btnEvent.ClickOnNumberButton(buttonSub, resultView);
+        btnEvent.ClickOnNumberButton(buttonDiv, resultView);
+        btnEvent.ClickOnNumberButton(buttonMul, resultView);
+
+        buttonC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resultView.setText(resultView.getText() + "2");
+                resultView.setText("0");
+                expressionView.setText("");
             }
         });
-
-        button3.setOnClickListener(new View.OnClickListener() {
+        buttonCE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resultView.setText(resultView.getText() + "3");
+                resultView.setText("0");
             }
         });
-
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resultView.setText(resultView.getText() + "4");
-            }
-        });
-
-        button5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resultView.setText(resultView.getText() + "5");
-            }
-        });
-
-        button6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resultView.setText(resultView.getText() + "6");
-            }
-        });
-
-        button7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resultView.setText(resultView.getText() + "7");
-            }
-        });
-
-        button8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resultView.setText(resultView.getText() + "8");
-            }
-        });
-
-        button9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resultView.setText(resultView.getText() + "9");
-            }
-        });
-
-        button0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resultView.setText(resultView.getText() + "0");
-            }
-        });
-
         buttonDot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 resultView.setText(resultView.getText() + ".");
             }
         });
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
+        buttonDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resultView.setText(resultView.getText() + "+");
-            }
-        });
-
-        buttonC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resultView.setText("0");
+                String expression = resultView.getText().toString();
+                if(expression.length() != 1)
+                    expression = expression.substring(0, expression.length() - 1);
+                else expression = "0";
+                resultView.setText(expression);
             }
         });
 
@@ -144,20 +103,36 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     private void cal() {
-        String math = resultView.getText().toString().trim();
-        if (math.length() > 0) {
+        char[] expression = resultView.getText().toString().trim().toCharArray();
+        String temp = resultView.getText().toString().trim();
+        for (int i = 0; i < expression.length; i++) {
+            if (expression[i] == '\u00D7')
+                expression[i] = '*';
+            if (expression[i] == '\u00f7')
+                expression[i] = '/';
+        }
+        if (expression.length > 0) {
             Balan balan = new Balan();
-            String result = balan.valueMath(math) + "";
+            double realResult = balan.valueMath(String.copyValueOf(expression));
+            int naturalResult;
+            String finalResult;
+            if (realResult % 1 == 0) {
+                naturalResult = (int) Math.round(realResult);
+                finalResult = String.valueOf(naturalResult);
+            }
+            else
+                finalResult = String.valueOf(realResult);
             String error = balan.getError();
 
             // check error
             if (error != null) {
                 resultView.setText(error);
             } else { // show result
-                resultView.setText(result);
+                expressionView.setText(temp);
+                resultView.setText(finalResult);
             }
         }
-    };
-
+    }
 }
