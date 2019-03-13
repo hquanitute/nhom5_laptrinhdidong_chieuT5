@@ -1,9 +1,13 @@
 package androiddev.nhom5.calculatorapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.*;
-import android.view.*;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import nguyenvanquan7826.com.Balan;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -118,6 +122,12 @@ public class MainActivity extends AppCompatActivity {
                 resultView.setText(resultView.getText() + ".");
             }
         });
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resultView.setText(resultView.getText() + "+");
+            }
+        });
 
         buttonC.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +135,29 @@ public class MainActivity extends AppCompatActivity {
                 resultView.setText("0");
             }
         });
+
+        buttonEqual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cal();
+            }
+        });
+
     }
+    private void cal() {
+        String math = resultView.getText().toString().trim();
+        if (math.length() > 0) {
+            Balan balan = new Balan();
+            String result = balan.valueMath(math) + "";
+            String error = balan.getError();
+
+            // check error
+            if (error != null) {
+                resultView.setText(error);
+            } else { // show result
+                resultView.setText(result);
+            }
+        }
+    };
 
 }
