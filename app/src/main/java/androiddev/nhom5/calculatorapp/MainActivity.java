@@ -1,11 +1,18 @@
 package androiddev.nhom5.calculatorapp;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import nguyenvanquan7826.com.Balan;
 
@@ -15,10 +22,12 @@ public class MainActivity extends AppCompatActivity {
             button7, button8, button9, buttonAdd, buttonSub, buttonDiv,
             buttonMul, buttonMínus, buttonC, buttonCE, buttonEqual,
             buttonDot, buttonPercent, buttonSqrt, buttonSqr, buttonFraction;
-    ImageButton buttonDel;
+    ImageButton buttonDel,buttonhis;
     TextView resultView, expressionView;
     double mValueOne, mValueTwo;
-
+    List<savekq> savehistories = new ArrayList<savekq>();
+    public static final int MY_REQUEST_CODE = 100;
+    savekq kqtrave;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         buttonEqual = findViewById(R.id.buttonEqual);
         resultView = findViewById(R.id.resultView);
         expressionView = findViewById(R.id.expressionView);
-
+        buttonhis = findViewById(R.id.buttonhis);
         ButtonEvents btnEvent = new ButtonEvents();
         btnEvent.ClickOnNumberButton(button0, resultView);
         btnEvent.ClickOnNumberButton(button1, resultView);
@@ -142,6 +151,16 @@ public class MainActivity extends AppCompatActivity {
                 cal();
             }
         });
+    }
+    protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK && requestCode == MY_REQUEST_CODE) {
+            Bundle args = data.getBundleExtra("bundle");
+            kqtrave =(savekq) args.getSerializable("kqtrave");
+            Toast.makeText(this,savehistories.toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(this,kqtrave.toString(),Toast.LENGTH_LONG).show();
+        } else{
+
+        }
 
     }
     private void cal() {
@@ -160,4 +179,22 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public void lichsu(View view) {
+        savekq ab = new savekq("1+2",3);
+        savekq ac = new savekq("1+2",4);
+        savekq ad = new savekq("1+2",5);
+        savekq ae = new savekq("1+2",6);
+        savekq af = new savekq("1+2",7);
+        savehistories.add(ab);
+        savehistories.add(ac);
+        savehistories.add(ad);
+        savehistories.add(ae);
+        savehistories.add(af);
+        Intent myIntent = new Intent(view.getContext(), save_history
+                .class);
+        Bundle args = new Bundle();
+        args.putSerializable("ARRAYLIST",(Serializable)savehistories);
+        myIntent.putExtra("BUNDLE",args);
+        this.startActivityForResult(myIntent,MY_REQUEST_CODE);
+    }
 }
