@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button button0, button1, button2, button3, button4, button5, button6,
             button7, button8, button9, buttonAdd, buttonSub, buttonDiv,
-            buttonMul, buttonMínus, buttonC, buttonCE, buttonEqual,
+            buttonMul, buttonMinus, buttonC, buttonCE, buttonEqual,
             buttonDot, buttonPercent, buttonSqrt, buttonSqr, buttonFraction;
     ImageButton buttonDel;
     TextView resultView, expressionView;
@@ -37,14 +37,14 @@ public class MainActivity extends AppCompatActivity {
         buttonMul = findViewById(R.id.buttonMul);
         buttonDiv = findViewById(R.id.buttonDiv);
         buttonC = findViewById(R.id.buttonC);
-        buttonCE = findViewById(R.id.buttonCE);
-        buttonDel = findViewById(R.id.buttonDel);
+        //buttonCE = findViewById(R.id.buttonCE);
+       // buttonDel = findViewById(R.id.buttonDel);
         buttonDot = findViewById(R.id.buttonDot);
-        buttonMínus = findViewById(R.id.buttonMinus);
+        buttonMinus = findViewById(R.id.buttonMinus);
         buttonPercent = findViewById(R.id.buttonPer);
         buttonSqr = findViewById(R.id.buttonSqr);
         buttonSqrt = findViewById(R.id.buttonSqrt);
-        buttonFraction = findViewById(R.id.buttonFrac);
+       // buttonFraction = findViewById(R.id.buttonFrac);
         buttonEqual = findViewById(R.id.buttonEqual);
         resultView = findViewById(R.id.resultView);
         expressionView = findViewById(R.id.expressionView);
@@ -72,28 +72,28 @@ public class MainActivity extends AppCompatActivity {
                 expressionView.setText("");
             }
         });
-        buttonCE.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resultView.setText("0");
-            }
-        });
+//        buttonCE.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                resultView.setText("0");
+//            }
+//        });
         buttonDot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 resultView.setText(resultView.getText() + ".");
             }
         });
-        buttonDel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String expression = resultView.getText().toString();
-                if(expression.length() != 1)
-                    expression = expression.substring(0, expression.length() - 1);
-                else expression = "0";
-                resultView.setText(expression);
-            }
-        });
+//        buttonDel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String expression = resultView.getText().toString();
+//                if(expression.length() != 1)
+//                    expression = expression.substring(0, expression.length() - 1);
+//                else expression = "0";
+//                resultView.setText(expression);
+//            }
+//        });
 
         buttonEqual.setOnClickListener(new View.OnClickListener() {
             @Override
