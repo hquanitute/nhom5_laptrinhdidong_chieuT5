@@ -156,8 +156,6 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK && requestCode == MY_REQUEST_CODE) {
             Bundle args = data.getBundleExtra("bundle");
             kqtrave =(savekq) args.getSerializable("kqtrave");
-            Toast.makeText(this,savehistories.toString(),Toast.LENGTH_LONG).show();
-            Toast.makeText(this,kqtrave.toString(),Toast.LENGTH_LONG).show();
         } else{
 
         }
@@ -177,10 +175,11 @@ public class MainActivity extends AppCompatActivity {
                 resultView.setText(result);
             }
         }
+
     };
 
     public void lichsu(View view) {
-        savekq ab = new savekq("1+2",3);
+       /* savekq ab = new savekq("1+2",3);
         savekq ac = new savekq("1+2",4);
         savekq ad = new savekq("1+2",5);
         savekq ae = new savekq("1+2",6);
@@ -189,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         savehistories.add(ac);
         savehistories.add(ad);
         savehistories.add(ae);
-        savehistories.add(af);
+        savehistories.add(af);*/
         Intent myIntent = new Intent(view.getContext(), save_history
                 .class);
         Bundle args = new Bundle();
@@ -197,4 +196,24 @@ public class MainActivity extends AppCompatActivity {
         myIntent.putExtra("BUNDLE",args);
         this.startActivityForResult(myIntent,MY_REQUEST_CODE);
     }
+
+    private  void Writehistory (List list,savekq savehistory)
+    {
+        if (kiemtrasopt(list)<5)
+        {
+            list.add(0,savehistory);
+        }
+        else
+        {
+            list.remove(4);
+            list.add(0,savehistory);
+        }
+
+    }
+    private int kiemtrasopt (List list)
+    {
+        int dem = list.size();
+        return dem;
+    }
+
 }

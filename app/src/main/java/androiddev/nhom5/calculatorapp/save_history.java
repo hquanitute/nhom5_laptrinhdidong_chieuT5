@@ -1,7 +1,9 @@
 package androiddev.nhom5.calculatorapp;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.drm.DrmStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,20 +19,26 @@ import java.util.List;
 public class save_history extends AppCompatActivity {
 
     private ListView lvhistory;
-    ArrayAdapter<savekq> savehistoryArrayAdapter;
+   // ArrayAdapter<savekq> savehistoryArrayAdapter;
     ArrayList<savekq> savekqArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save_history);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE");
-        savekqArrayList = (ArrayList<savekq>)
-        args.getSerializable("ARRAYLIST");
-        addcontrol();
-        daydulieulen();
+        savekqArrayList = (ArrayList<savekq>) args.getSerializable("ARRAYLIST");
+        datalist();
         addevent();
+    }
+
+    private void datalist() {
+        lvhistory =(ListView) findViewById(R.id.lvhistory);
+        customAdapter customAdapter = new customAdapter(this,R.layout.list_row,savekqArrayList);
+        lvhistory.setAdapter(customAdapter);
     }
 
     private void addevent() {
@@ -53,18 +61,5 @@ public class save_history extends AppCompatActivity {
     }
 
 
-    private void daydulieulen() {
 
-
-        for(savekq s : savekqArrayList)
-        {
-            savehistoryArrayAdapter.add(s);
-        }
-    }
-
-    private void addcontrol() {
-        lvhistory =(ListView) findViewById(R.id.lvhistory);
-        savehistoryArrayAdapter = new ArrayAdapter<savekq>(save_history.this,android.R.layout.simple_list_item_1);
-        lvhistory.setAdapter(savehistoryArrayAdapter);
-    }
 }
