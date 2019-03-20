@@ -40,7 +40,6 @@ public class save_history extends AppCompatActivity {
         customAdapter customAdapter = new customAdapter(this,R.layout.list_row,savekqArrayList);
         lvhistory.setAdapter(customAdapter);
     }
-
     private void addevent() {
         lvhistory.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -59,7 +58,4 @@ public class save_history extends AppCompatActivity {
                 }
         );
     }
-
-
-
 }

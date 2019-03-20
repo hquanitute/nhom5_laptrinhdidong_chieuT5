@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
             buttonMul, buttonMínus, buttonC, buttonAC, buttonEqual,buttonPi,buttonLeftBrack,buttonRightBrack,
             buttonDot, buttonPercent, buttonSqrt, buttonSqr, buttonFraction,buttonDel;
            
-    ImageButton buttonDel,buttonhis;
+    ImageButton buttonhis;
 
     TextView resultView, expressionView;
 
@@ -163,12 +163,13 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK && requestCode == MY_REQUEST_CODE) {
             Bundle args = data.getBundleExtra("bundle");
             kqtrave =(savekq) args.getSerializable("kqtrave");
+            resultView.setText(Long.toString(kqtrave.ketqua));
+            expressionView.setText(kqtrave.bieuthu);
         } else{
             Toast.makeText(this,"ko co gi",Toast.LENGTH_LONG).show();
         }
 
     }
-
     private void cal() {
         char[] expression = expressionView.getText().toString().trim().toCharArray();
         String temp = expressionView.getText().toString().trim();
@@ -201,10 +202,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-}
-
-
-
     public void lichsu(View view) {
         Intent myIntent = new Intent(view.getContext(), save_history
                 .class);
@@ -213,8 +210,7 @@ public class MainActivity extends AppCompatActivity {
         myIntent.putExtra("BUNDLE",args);
         this.startActivityForResult(myIntent,MY_REQUEST_CODE);
     }
-    private  void Writehistory (List list,savekq savehistory)
-    {
+    private  void Writehistory (List list,savekq savehistory) {
         if (kiemtrasopt(list)<5) {
             list.add(0,savehistory);
         }
