@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
             button7, button8, button9, buttonAdd, buttonSub, buttonDiv,
             buttonMul, buttonMínus, buttonCE, buttonAC, buttonEqual,buttonPi,buttonLeftBrack,buttonRightBrack,
             buttonDot, buttonPercent, buttonSqrt, buttonSqr, buttonFraction,buttonDel;
+
     ImageButton buttonhis;
 
     TextView resultView, expressionView;
@@ -34,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("result",resultView.getText().toString());
-        outState.putString("expression",expressionView.getText().toString());
+        outState.putString("result", resultView.getText().toString());
+        outState.putString("expression", expressionView.getText().toString());
     }
 
     @Override
@@ -65,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
         //buttonSqr = findViewById(R.id.buttonSqr);
         buttonSqrt = findViewById(R.id.buttonSqrt);
         // buttonFraction = findViewById(R.id.buttonFrac);
-        buttonPi=findViewById(R.id.buttonPi);
+        buttonPi = findViewById(R.id.buttonPi);
         buttonEqual = findViewById(R.id.buttonEqual);
-        buttonLeftBrack=findViewById(R.id.buttonLeftBrack);
-        buttonRightBrack=findViewById(R.id.buttonRightBrack);
+        buttonLeftBrack = findViewById(R.id.buttonLeftBrack);
+        buttonRightBrack = findViewById(R.id.buttonRightBrack);
         resultView = findViewById(R.id.resultView);
         expressionView = findViewById(R.id.expressionView);
         buttonhis = findViewById(R.id.buttonhis);
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         btnEvent.ClickOnNumberButton(buttonSub, expressionView);
         btnEvent.ClickOnNumberButton(buttonDiv, expressionView);
         btnEvent.ClickOnNumberButton(buttonMul, expressionView);
-        if(savedInstanceState!=null) {
+        if (savedInstanceState != null) {
             resultView.setText(savedInstanceState.getString("result"));
             expressionView.setText(savedInstanceState.getString("expression"));
         }
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String expression = expressionView.getText().toString();
-                if(expression.length() != 1)
+                if (expression.length() != 1)
                     expression = expression.substring(0, expression.length() - 1);
                 else expression = "0";
                 expressionView.setText(expression);
@@ -152,13 +153,24 @@ public class MainActivity extends AppCompatActivity {
                 cal();
             }
         });
+        savekq ab = new savekq("1+2",3);
+        savekq ac = new savekq("1+2",4);
+        savekq ad = new savekq("1+2",5);
+        savekq ae = new savekq("1+2",6);
+        savekq af = new savekq("1+2",7);
+        savehistories.add(ab);
+        savehistories.add(ac);
+        savehistories.add(ad);
+        savehistories.add(ae);
+        savehistories.add(af);
     }
-    protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == MY_REQUEST_CODE) {
             Bundle args = data.getBundleExtra("bundle");
             kqtrave =(savekq) args.getSerializable("kqtrave");
         } else{
-
+            Toast.makeText(this,"ko co gi",Toast.LENGTH_LONG).show();
         }
 
     }
@@ -180,8 +192,7 @@ public class MainActivity extends AppCompatActivity {
             if (realResult % 1 == 0) {
                 naturalResult = (int) Math.round(realResult);
                 finalResult = String.valueOf(naturalResult);
-            }
-            else
+            } else
                 finalResult = String.valueOf(realResult);
             String error = balan.getError();
 
@@ -193,22 +204,12 @@ public class MainActivity extends AppCompatActivity {
                 resultView.setText(finalResult);
             }
         }
-    }
+
 
 
 
 
     public void lichsu(View view) {
-       /* savekq ab = new savekq("1+2",3);
-        savekq ac = new savekq("1+2",4);
-        savekq ad = new savekq("1+2",5);
-        savekq ae = new savekq("1+2",6);
-        savekq af = new savekq("1+2",7);
-        savehistories.add(ab);
-        savehistories.add(ac);
-        savehistories.add(ad);
-        savehistories.add(ae);
-        savehistories.add(af);*/
         Intent myIntent = new Intent(view.getContext(), save_history
                 .class);
         Bundle args = new Bundle();
@@ -216,22 +217,17 @@ public class MainActivity extends AppCompatActivity {
         myIntent.putExtra("BUNDLE",args);
         this.startActivityForResult(myIntent,MY_REQUEST_CODE);
     }
-
     private  void Writehistory (List list,savekq savehistory)
     {
-        if (kiemtrasopt(list)<5)
-        {
+        if (kiemtrasopt(list)<5) {
             list.add(0,savehistory);
         }
-        else
-        {
+        else {
             list.remove(4);
             list.add(0,savehistory);
         }
-
     }
-    private int kiemtrasopt (List list)
-    {
+    private int kiemtrasopt (List list) {
         int dem = list.size();
         return dem;
     }
