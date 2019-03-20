@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
             buttonDot, buttonAC, buttonPi, buttonLeftBrack, buttonRightBrack;
     ImageButton buttonhis, buttonDel;
     ArrayList<savekq> list = new ArrayList<>();
+
     TextView resultView, expressionView;
     private boolean mIsCalculating = false, mIsTyping = false;
     private double result = 0;
@@ -257,7 +258,12 @@ public class MainActivity extends AppCompatActivity {
                 expressionView.setText(expressionView.getText() + ".");
             }
         });
-
+        buttonCE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resultView.setText("0");
+            }
+        });
         buttonDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -316,12 +322,43 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == MY_REQUEST_CODE) {
             Bundle args = data.getBundleExtra("bundle");
-            kqtrave = (savekq) args.getSerializable("kqtrave");
-        } else {
-            Toast.makeText(this, "ko co gi", Toast.LENGTH_LONG).show();
+            kqtrave =(savekq) args.getSerializable("kqtrave");
+            resultView.setText(Long.toString(kqtrave.ketqua));
+            expressionView.setText(kqtrave.bieuthu);
+        } else{
+            Toast.makeText(this,"ko co gi",Toast.LENGTH_LONG).show();
         }
 
     }
+    private void cal() {
+        char[] expression = expressionView.getText().toString().trim().toCharArray();
+        String temp = expressionView.getText().toString().trim();
+        for (int i = 0; i < expression.length; i++) {
+            if (expression[i] == '\u00D7')
+                expression[i] = '*';
+            if (expression[i] == '\u00f7')
+                expression[i] = '/';
+        }
+        if (expression.length > 0) {
+            Balan balan = new Balan();
+            double realResult = balan.valueMath(String.copyValueOf(expression));
+            int naturalResult;
+            String finalResult;
+            if (realResult % 1 == 0) {
+                naturalResult = (int) Math.round(realResult);
+                finalResult = String.valueOf(naturalResult);
+            } else
+                finalResult = String.valueOf(realResult);
+            String error = balan.getError();
+
+            // check error
+            if (error != null) {
+                resultView.setText(error);
+            } else { // show result
+                expressionView.setText(temp);
+                resultView.setText(finalResult);
+            }
+        }
 
 
     public void lichsu(View view) {
@@ -333,10 +370,11 @@ public class MainActivity extends AppCompatActivity {
         this.startActivityForResult(myIntent, MY_REQUEST_CODE);
     }
 
-    private void Writehistory(List list, savekq savehistory) {
-        if (kiemtrasopt(list) < 5) {
-            list.add(0, savehistory);
-        } else {
+    private  void Writehistory (List list,savekq savehistory) {
+        if (kiemtrasopt(list)<5) {
+            list.add(0,savehistory);
+        }
+        else {
             list.remove(4);
             list.add(0, savehistory);
         }
