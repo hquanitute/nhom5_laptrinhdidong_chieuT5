@@ -1,15 +1,11 @@
 package androiddev.nhom5.calculatorapp;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.Spinner;
 
 public class MainActivity_Horizontal extends AppCompatActivity {
 
@@ -20,7 +16,7 @@ public class MainActivity_Horizontal extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setLogo(R.mipmap.calculator);
         actionBar.setDisplayUseLogoEnabled (true);
-        actionBar.setTitle("  Calculator Made By Group 5");
+        actionBar.setTitle("Calculator Made By Group 5");
         actionBar.setDisplayShowHomeEnabled(true);
     }
     @Override
