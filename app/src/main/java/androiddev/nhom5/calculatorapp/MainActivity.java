@@ -147,14 +147,24 @@ public class MainActivity extends AppCompatActivity {
                 cal();
             }
         });
+        savekq ab = new savekq("1+2",3);
+        savekq ac = new savekq("1+2",4);
+        savekq ad = new savekq("1+2",5);
+        savekq ae = new savekq("1+2",6);
+        savekq af = new savekq("1+2",7);
+        savehistories.add(ab);
+        savehistories.add(ac);
+        savehistories.add(ad);
+        savehistories.add(ae);
+        savehistories.add(af);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == MY_REQUEST_CODE) {
             Bundle args = data.getBundleExtra("bundle");
-            kqtrave = (savekq) args.getSerializable("kqtrave");
-        } else {
-
+            kqtrave =(savekq) args.getSerializable("kqtrave");
+        } else{
+            Toast.makeText(this,"ko co gi",Toast.LENGTH_LONG).show();
         }
 
     }
@@ -192,17 +202,8 @@ public class MainActivity extends AppCompatActivity {
 }
 
 
+
     public void lichsu(View view) {
-       /* savekq ab = new savekq("1+2",3);
-        savekq ac = new savekq("1+2",4);
-        savekq ad = new savekq("1+2",5);
-        savekq ae = new savekq("1+2",6);
-        savekq af = new savekq("1+2",7);
-        savehistories.add(ab);
-        savehistories.add(ac);
-        savehistories.add(ad);
-        savehistories.add(ae);
-        savehistories.add(af);*/
         Intent myIntent = new Intent(view.getContext(), save_history
                 .class);
         Bundle args = new Bundle();
@@ -210,22 +211,17 @@ public class MainActivity extends AppCompatActivity {
         myIntent.putExtra("BUNDLE",args);
         this.startActivityForResult(myIntent,MY_REQUEST_CODE);
     }
-
     private  void Writehistory (List list,savekq savehistory)
     {
-        if (kiemtrasopt(list)<5)
-        {
+        if (kiemtrasopt(list)<5) {
             list.add(0,savehistory);
         }
-        else
-        {
+        else {
             list.remove(4);
             list.add(0,savehistory);
         }
-
     }
-    private int kiemtrasopt (List list)
-    {
+    private int kiemtrasopt (List list) {
         int dem = list.size();
         return dem;
     }
