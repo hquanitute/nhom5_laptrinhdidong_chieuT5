@@ -20,10 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
     Button button0, button1, button2, button3, button4, button5, button6,
             button7, button8, button9, buttonAdd, buttonSub, buttonDiv,
-            buttonMul, buttonMínus, buttonC, buttonAC, buttonEqual,buttonPi,buttonLeftBrack,buttonRightBrack,
+            buttonMul, buttonMínus, buttonCE, buttonAC, buttonEqual,buttonPi,buttonLeftBrack,buttonRightBrack,
             buttonDot, buttonPercent, buttonSqrt, buttonSqr, buttonFraction,buttonDel;
-           
-    ImageButton buttonDel,buttonhis;
+    ImageButton buttonhis;
 
     TextView resultView, expressionView;
 
@@ -57,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
         buttonSub = findViewById(R.id.buttonSub);
         buttonMul = findViewById(R.id.buttonMul);
         buttonDiv = findViewById(R.id.buttonDiv);
-        //buttonC = findViewById(R.id.button);
+        buttonCE = findViewById(R.id.buttonCE);
         buttonAC = findViewById(R.id.buttonAC);
         buttonDel = findViewById(R.id.buttonDel);
         buttonDot = findViewById(R.id.buttonDot);
         buttonMínus = findViewById(R.id.buttonMinus);
         buttonPercent = findViewById(R.id.buttonPer);
-        buttonSqr = findViewById(R.id.buttonSqr);
+        //buttonSqr = findViewById(R.id.buttonSqr);
         buttonSqrt = findViewById(R.id.buttonSqrt);
         // buttonFraction = findViewById(R.id.buttonFrac);
         buttonPi=findViewById(R.id.buttonPi);
@@ -130,7 +129,12 @@ public class MainActivity extends AppCompatActivity {
                 expressionView.setText(expressionView.getText() + ".");
             }
         });
-
+        buttonCE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resultView.setText("0");
+            }
+        });
         buttonDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-}
+
 
 
     public void lichsu(View view) {
