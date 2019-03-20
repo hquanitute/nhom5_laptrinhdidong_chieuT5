@@ -13,10 +13,16 @@ public class MainActivity extends AppCompatActivity {
 
     Button button0, button1, button2, button3, button4, button5, button6,
             button7, button8, button9, buttonAdd, buttonSub, buttonDiv,
-            buttonMul, buttonMínus, buttonC, buttonCE, buttonEqual,
-            buttonDot, buttonPercent, buttonSqrt, buttonSqr, buttonFraction;
-    ImageButton buttonDel;
+            buttonMul, buttonMínus, buttonC, buttonAC, buttonEqual,buttonPi,buttonLeftBrack,buttonRightBrack,
+            buttonDot, buttonPercent, buttonSqrt, buttonSqr, buttonFraction,buttonDel;
     TextView resultView, expressionView;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("result",resultView.getText().toString());
+        outState.putString("expression",expressionView.getText().toString());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,62 +42,88 @@ public class MainActivity extends AppCompatActivity {
         buttonSub = findViewById(R.id.buttonSub);
         buttonMul = findViewById(R.id.buttonMul);
         buttonDiv = findViewById(R.id.buttonDiv);
-        buttonC = findViewById(R.id.buttonC);
-        buttonCE = findViewById(R.id.buttonCE);
+        //buttonC = findViewById(R.id.button);
+        buttonAC = findViewById(R.id.buttonAC);
         buttonDel = findViewById(R.id.buttonDel);
         buttonDot = findViewById(R.id.buttonDot);
         buttonMínus = findViewById(R.id.buttonMinus);
         buttonPercent = findViewById(R.id.buttonPer);
         buttonSqr = findViewById(R.id.buttonSqr);
         buttonSqrt = findViewById(R.id.buttonSqrt);
-        buttonFraction = findViewById(R.id.buttonFrac);
+        // buttonFraction = findViewById(R.id.buttonFrac);
+        buttonPi=findViewById(R.id.buttonPi);
         buttonEqual = findViewById(R.id.buttonEqual);
+        buttonLeftBrack=findViewById(R.id.buttonLeftBrack);
+        buttonRightBrack=findViewById(R.id.buttonRightBrack);
         resultView = findViewById(R.id.resultView);
         expressionView = findViewById(R.id.expressionView);
 
         ButtonEvents btnEvent = new ButtonEvents();
-        btnEvent.ClickOnNumberButton(button0, resultView);
-        btnEvent.ClickOnNumberButton(button1, resultView);
-        btnEvent.ClickOnNumberButton(button2, resultView);
-        btnEvent.ClickOnNumberButton(button3, resultView);
-        btnEvent.ClickOnNumberButton(button4, resultView);
-        btnEvent.ClickOnNumberButton(button5, resultView);
-        btnEvent.ClickOnNumberButton(button6, resultView);
-        btnEvent.ClickOnNumberButton(button7, resultView);
-        btnEvent.ClickOnNumberButton(button8, resultView);
-        btnEvent.ClickOnNumberButton(button9, resultView);
-        btnEvent.ClickOnNumberButton(buttonAdd, resultView);
-        btnEvent.ClickOnNumberButton(buttonSub, resultView);
-        btnEvent.ClickOnNumberButton(buttonDiv, resultView);
-        btnEvent.ClickOnNumberButton(buttonMul, resultView);
-
-        buttonC.setOnClickListener(new View.OnClickListener() {
+        btnEvent.ClickOnNumberButton(button0, expressionView);
+        btnEvent.ClickOnNumberButton(button1, expressionView);
+        btnEvent.ClickOnNumberButton(button2, expressionView);
+        btnEvent.ClickOnNumberButton(button3, expressionView);
+        btnEvent.ClickOnNumberButton(button4, expressionView);
+        btnEvent.ClickOnNumberButton(button5, expressionView);
+        btnEvent.ClickOnNumberButton(button6, expressionView);
+        btnEvent.ClickOnNumberButton(button7, expressionView);
+        btnEvent.ClickOnNumberButton(button8, expressionView);
+        btnEvent.ClickOnNumberButton(button9, expressionView);
+        btnEvent.ClickOnNumberButton(buttonAdd, expressionView);
+        btnEvent.ClickOnNumberButton(buttonSub, expressionView);
+        btnEvent.ClickOnNumberButton(buttonDiv, expressionView);
+        btnEvent.ClickOnNumberButton(buttonMul, expressionView);
+        if(savedInstanceState!=null) {
+            resultView.setText(savedInstanceState.getString("result"));
+            expressionView.setText(savedInstanceState.getString("expression"));
+        }
+//        buttonC.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                resultView.setText("0");
+//                expressionView.setText("");
+//            }
+//        });
+        buttonAC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 resultView.setText("0");
                 expressionView.setText("");
             }
         });
-        buttonCE.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resultView.setText("0");
-            }
-        });
+//        buttonRightBrack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                expressionView.setText(expressionView.getText()+")");
+//            }
+//        });
+//        buttonSqrt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                expressionView.setText(expressionView.getText()+"\u221A");
+//            }
+//        });
+//      buttonPi.setOnClickListener(new View.OnClickListener() {
+//         @Override
+//          public void onClick(View v) {
+//             expressionView.setText(expressionView.getText()+"3.14");
+//           }
+//       });
         buttonDot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resultView.setText(resultView.getText() + ".");
+                expressionView.setText(expressionView.getText() + ".");
             }
         });
+
         buttonDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String expression = resultView.getText().toString();
+                String expression = expressionView.getText().toString();
                 if(expression.length() != 1)
                     expression = expression.substring(0, expression.length() - 1);
                 else expression = "0";
-                resultView.setText(expression);
+                expressionView.setText(expression);
             }
         });
 
@@ -105,8 +137,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void cal() {
-        char[] expression = resultView.getText().toString().trim().toCharArray();
-        String temp = resultView.getText().toString().trim();
+        char[] expression = expressionView.getText().toString().trim().toCharArray();
+        String temp = expressionView.getText().toString().trim();
         for (int i = 0; i < expression.length; i++) {
             if (expression[i] == '\u00D7')
                 expression[i] = '*';
