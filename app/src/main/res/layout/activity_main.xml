@@ -32,7 +32,7 @@
             android:src="@drawable/history"
             android:onClick="lichsu"/>
 
->
+        >
 
     </LinearLayout>
 
@@ -65,13 +65,14 @@
             android:layout_weight="1">
 
             <Button
-                android:textColor="#FFFFFF"
                 android:id="@+id/buttonCE"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button"
+                android:onClick="buttonCE"
                 android:text="CE"
+                android:textColor="#FFFFFF"
                 android:textSize="25sp" />
 
             <Button
@@ -80,6 +81,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button"
+                android:onClick="buttonC"
                 android:text="C"
                 android:textSize="25sp" />
 
@@ -89,6 +91,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button"
+                android:onClick="buttonDel"
                 app:srcCompat="@drawable/backspace" />
 
             <Button
@@ -242,7 +245,6 @@
                 android:textSize="25sp" />
 
             <Button
-                android:textColor="#FFFFFF"
                 android:id="@+id/buttonAdd"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
@@ -250,6 +252,7 @@
                 android:background="@drawable/orange_circle_button"
                 android:onClick="onOperatorButtonClick"
                 android:text="+"
+                android:textColor="#FFFFFF"
                 android:textSize="25sp" />
         </TableRow>
 
@@ -259,13 +262,14 @@
             android:layout_weight="1">
 
             <Button
-                android:textColor="#FFFFFF"
                 android:id="@+id/buttonMinus"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="buttonMinus"
                 android:text="\u00b1"
+                android:textColor="#FFFFFF"
                 android:textSize="25sp" />
 
             <Button
@@ -280,13 +284,14 @@
                 android:textSize="25sp" />
 
             <Button
-                android:textColor="#FFFFFF"
                 android:id="@+id/buttonDot"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="buttonDot"
                 android:text="\u00b7"
+                android:textColor="#FFFFFF"
                 android:textSize="25sp" />
 
             <Button

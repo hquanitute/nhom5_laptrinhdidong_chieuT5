@@ -14,15 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.io.Serializable;
+
 import nguyenvanquan7826.com.Balan;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button button0, button1, button2, button3, button4, button5, button6,
-            button7, button8, button9, buttonAdd, buttonSub, buttonDiv,
-            buttonMul, buttonMinus, buttonC, buttonCE, buttonEqual,
-            buttonDot, buttonAC, buttonPi, buttonLeftBrack, buttonRightBrack;
-    ImageButton buttonhis, buttonDel;
     ArrayList<savekq> list = new ArrayList<>();
 
     TextView resultView, expressionView;
@@ -168,32 +164,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //region Gán id cho các button
-        button0 = findViewById(R.id.button0);
-        button1 = findViewById(R.id.button1);
-        button2 = findViewById(R.id.button2);
-        button3 = findViewById(R.id.button3);
-        button4 = findViewById(R.id.button4);
-        button5 = findViewById(R.id.button5);
-        button6 = findViewById(R.id.button6);
-        button7 = findViewById(R.id.button7);
-        button8 = findViewById(R.id.button8);
-        button9 = findViewById(R.id.button9);
-        buttonAdd = findViewById(R.id.buttonAdd);
-        buttonSub = findViewById(R.id.buttonSub);
-        buttonMul = findViewById(R.id.buttonMul);
-        buttonDiv = findViewById(R.id.buttonDiv);
-        buttonC = findViewById(R.id.buttonC);
-        buttonCE = findViewById(R.id.buttonCE);
-        buttonAC = findViewById(R.id.buttonAC);
-        buttonDel = findViewById(R.id.buttonDel);
-        buttonDot = findViewById(R.id.buttonDot);
-        buttonMinus = findViewById(R.id.buttonMinus);
-        buttonPi = findViewById(R.id.buttonPi);
-        buttonEqual = findViewById(R.id.buttonEqual);
-        buttonLeftBrack = findViewById(R.id.buttonLeftBrack);
-        buttonRightBrack = findViewById(R.id.buttonRightBrack);
-        buttonhis = findViewById(R.id.buttonhis);
         resultView = findViewById(R.id.resultView);
         expressionView = findViewById(R.id.expressionView);
         //endregion
@@ -202,91 +172,8 @@ public class MainActivity extends AppCompatActivity {
             resultView.setText(savedInstanceState.getString("result"));
             expressionView.setText(savedInstanceState.getString("expression"));
         }
-        buttonC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resultView.setText("0");
-                expressionView.setText("");
-            }
-        });
 
-//        buttonAC.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                resultView.setText("0");
-//                expressionView.setText("");
-//                mIsTyping = false;
-//                mIsCalculating = false;
-//                result = 0;
-//            }
-//        });
-        buttonCE.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resultView.setText("0");
-                mIsTyping = false;
-            }
-        });
-        buttonDot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resultView.setText(resultView.getText() + ".");
-                mIsTyping = true;
-            }
-        });
-//        buttonRightBrack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                expressionView.setText(expressionView.getText()+")");
-//            }
-//        });
-//        buttonSqrt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                expressionView.setText(expressionView.getText()+"\u221A");
-//            }
-//        });
-//      buttonPi.setOnClickListener(new View.OnClickListener() {
-//         @Override
-//          public void onClick(View v) {
-//             expressionView.setText(expressionView.getText()+"3.14");
-//           }
-//       });
-        buttonDot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                expressionView.setText(expressionView.getText() + ".");
-            }
-        });
-        buttonCE.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resultView.setText("0");
-            }
-        });
-        buttonDel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String expression = resultView.getText().toString();
-                if (expression.length() != 1)
-                    expression = expression.substring(0, expression.length() - 1);
-                else {
-                    expression = "0";
-                    mIsTyping = false;
-                }
-                resultView.setText(expression);
-            }
-        });
-        buttonMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!resultView.getText().toString().equals("0"))
-                    if (resultView.getText().toString().substring(0, 1).equals("-"))
-                        resultView.setText(resultView.getText().toString().substring(1));
-                    else
-                        resultView.setText("-" + resultView.getText());
-            }
-        });
+
     }
 
     //    private void cal() {
@@ -322,14 +209,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == MY_REQUEST_CODE) {
             Bundle args = data.getBundleExtra("bundle");
-            kqtrave =(savekq) args.getSerializable("kqtrave");
+            kqtrave = (savekq) args.getSerializable("kqtrave");
             resultView.setText(Long.toString(kqtrave.ketqua));
             expressionView.setText(kqtrave.bieuthu);
-        } else{
-            Toast.makeText(this,"ko co gi",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "ko co gi", Toast.LENGTH_LONG).show();
         }
 
     }
+
     private void cal() {
         char[] expression = expressionView.getText().toString().trim().toCharArray();
         String temp = expressionView.getText().toString().trim();
@@ -360,6 +248,101 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
+    //cac button chuc nang ----------------------------------------------------------------
+    public void buttonC(View view) {
+        resultView.setText("0");
+        expressionView.setText("");
+    }
+
+    public void buttonAC(View view) {
+        resultView.setText("0");
+        expressionView.setText("");
+        mIsTyping = false;
+        mIsCalculating = false;
+        result = 0;
+    }
+
+    public void buttonCE(View view) {
+        resultView.setText("0");
+        mIsTyping = false;
+    }
+
+    public void buttonDot(View view) {
+        resultView.setText(resultView.getText() + ".");
+        mIsTyping = true;
+    }
+
+
+    public void buttonRightBrack(View v) {
+        expressionView.setText(expressionView.getText() + ")");
+    }
+
+    public void buttonLeftBrack(View v) {
+        expressionView.setText(expressionView.getText() + "(");
+    }
+
+
+    public void buttonSqrt(View v) {
+        expressionView.setText(expressionView.getText() + "\u221A");
+    }
+
+
+    public void buttonPi(View v) {
+        expressionView.setText(expressionView.getText() + "3.14");
+    }
+
+    public void buttonDel(View v) {
+        String expression = resultView.getText().toString();
+        if (expression.length() != 1)
+            expression = expression.substring(0, expression.length() - 1);
+        else {
+            expression = "0";
+            mIsTyping = false;
+        }
+        resultView.setText(expression);
+    }
+
+    public void buttonMinus(View v) {
+        if (!resultView.getText().toString().equals("0"))
+            if (resultView.getText().toString().substring(0, 1).equals("-"))
+                resultView.setText(resultView.getText().toString().substring(1));
+            else
+                resultView.setText("-" + resultView.getText());
+    }
+
+    public void buttonStage(View v) {
+        expressionView.setText(expressionView.getText() + "!");
+    }
+
+
+    public void buttonExpone(View v) {
+        expressionView.setText(expressionView.getText() + "^");
+    }
+
+
+    public void buttonPercent(View v) {
+        expressionView.setText(expressionView.getText() + "%");
+    }
+
+
+    public void buttonSin(View v) {
+        expressionView.setText(expressionView.getText() + "sin(");
+    }
+
+
+    public void buttonCos(View v) {
+        expressionView.setText(expressionView.getText() + "cos(");
+    }
+
+
+    public void buttonTan(View v) {
+        expressionView.setText(expressionView.getText() + "tan(");
+    }
+
+
+    //--------------------------------------------------------------------------
     public void lichsu(View view) {
         Intent myIntent = new Intent(view.getContext(), save_history
                 .class);
@@ -369,11 +352,10 @@ public class MainActivity extends AppCompatActivity {
         this.startActivityForResult(myIntent, MY_REQUEST_CODE);
     }
 
-    private  void Writehistory (List list,savekq savehistory) {
-        if (kiemtrasopt(list)<5) {
-            list.add(0,savehistory);
-        }
-        else {
+    private void Writehistory(List list, savekq savehistory) {
+        if (kiemtrasopt(list) < 5) {
+            list.add(0, savehistory);
+        } else {
             list.remove(4);
             list.add(0, savehistory);
         }
