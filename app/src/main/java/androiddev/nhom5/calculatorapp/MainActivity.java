@@ -1,11 +1,18 @@
 package androiddev.nhom5.calculatorapp;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import nguyenvanquan7826.com.Balan;
 
@@ -13,9 +20,13 @@ public class MainActivity extends AppCompatActivity {
 
     Button button0, button1, button2, button3, button4, button5, button6,
             button7, button8, button9, buttonAdd, buttonSub, buttonDiv,
+
             buttonMul, buttonMinus, buttonC, buttonCE, buttonEqual,
-            buttonDot;
+            buttonDot, buttonAC, buttonPi, buttonLeftBrack, buttonRightBrack,
+            buttonDot, buttonPercent, buttonSqrt, buttonSqr, buttonFraction, buttonDel;
+    ImageButton buttonhis;
     ImageButton buttonDel;
+
     TextView resultView, expressionView;
     private boolean mIsCalculating = false, mIsTyping = false;
     private double result = 0;
@@ -149,6 +160,18 @@ public class MainActivity extends AppCompatActivity {
         mIsCalculating = true;
     }
 
+    double mValueOne, mValueTwo;
+    List<savekq> savehistories = new ArrayList<savekq>();
+    public static final int MY_REQUEST_CODE = 100;
+    savekq kqtrave;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("result", resultView.getText().toString());
+        outState.putString("expression", expressionView.getText().toString());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,17 +191,37 @@ public class MainActivity extends AppCompatActivity {
         buttonSub = findViewById(R.id.buttonSub);
         buttonMul = findViewById(R.id.buttonMul);
         buttonDiv = findViewById(R.id.buttonDiv);
-        buttonC = findViewById(R.id.buttonC);
-        buttonCE = findViewById(R.id.buttonCE);
+        //buttonC = findViewById(R.id.button);
+        buttonAC = findViewById(R.id.buttonAC);
         buttonDel = findViewById(R.id.buttonDel);
         buttonDot = findViewById(R.id.buttonDot);
         buttonMinus = findViewById(R.id.buttonMinus);
+        buttonPercent = findViewById(R.id.buttonPer);
+        buttonSqr = findViewById(R.id.buttonSqr);
+        buttonSqrt = findViewById(R.id.buttonSqrt);
+        // buttonFraction = findViewById(R.id.buttonFrac);
+        buttonPi = findViewById(R.id.buttonPi);
         buttonEqual = findViewById(R.id.buttonEqual);
+        buttonLeftBrack = findViewById(R.id.buttonLeftBrack);
+        buttonRightBrack = findViewById(R.id.buttonRightBrack);
         resultView = findViewById(R.id.resultView);
         expressionView = findViewById(R.id.expressionView);
         //endregion
 
         buttonC.setOnClickListener(new View.OnClickListener() {
+        buttonhis = findViewById(R.id.buttonhis);
+        if (savedInstanceState != null) {
+            resultView.setText(savedInstanceState.getString("result"));
+            expressionView.setText(savedInstanceState.getString("expression"));
+        }
+//        buttonC.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                resultView.setText("0");
+//                expressionView.setText("");
+//            }
+//        });
+        buttonAC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 resultView.setText("0");
@@ -201,7 +244,32 @@ public class MainActivity extends AppCompatActivity {
                 resultView.setText(resultView.getText() + ".");
                 mIsTyping = true;
             }
+        }
+//        buttonRightBrack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                expressionView.setText(expressionView.getText()+")");
+//            }
+//        });
+//        buttonSqrt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                expressionView.setText(expressionView.getText()+"\u221A");
+//            }
+//        });
+//      buttonPi.setOnClickListener(new View.OnClickListener() {
+//         @Override
+//          public void onClick(View v) {
+//             expressionView.setText(expressionView.getText()+"3.14");
+//           }
+//       });
+        buttonDot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expressionView.setText(expressionView.getText() + ".");
+            }
         });
+
         buttonDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -256,4 +324,51 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        }
 //    }
+        savekq ab = new savekq("1+2",3);
+        savekq ac = new savekq("1+2",4);
+        savekq ad = new savekq("1+2",5);
+        savekq ae = new savekq("1+2",6);
+        savekq af = new savekq("1+2",7);
+        savehistories.add(ab);
+        savehistories.add(ac);
+        savehistories.add(ad);
+        savehistories.add(ae);
+        savehistories.add(af);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK && requestCode == MY_REQUEST_CODE) {
+            Bundle args = data.getBundleExtra("bundle");
+            kqtrave =(savekq) args.getSerializable("kqtrave");
+        } else{
+            Toast.makeText(this,"ko co gi",Toast.LENGTH_LONG).show();
+        }
+
+    }
+
 }
+
+    public void lichsu(View view) {
+        Intent myIntent = new Intent(view.getContext(), save_history
+                .class);
+        Bundle args = new Bundle();
+        args.putSerializable("ARRAYLIST",(Serializable)savehistories);
+        myIntent.putExtra("BUNDLE",args);
+        this.startActivityForResult(myIntent,MY_REQUEST_CODE);
+    }
+    private  void Writehistory (List list,savekq savehistory)
+    {
+        if (kiemtrasopt(list)<5) {
+            list.add(0,savehistory);
+        }
+        else {
+            list.remove(4);
+            list.add(0,savehistory);
+        }
+    }
+    private int kiemtrasopt (List list) {
+        int dem = list.size();
+        return dem;
+    }
+}
+
