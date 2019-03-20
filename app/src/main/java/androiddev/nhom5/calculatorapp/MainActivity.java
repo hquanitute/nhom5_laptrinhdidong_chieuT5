@@ -153,16 +153,6 @@ public class MainActivity extends AppCompatActivity {
                 cal();
             }
         });
-        savekq ab = new savekq("1+2",3);
-        savekq ac = new savekq("1+2",4);
-        savekq ad = new savekq("1+2",5);
-        savekq ae = new savekq("1+2",6);
-        savekq af = new savekq("1+2",7);
-        savehistories.add(ab);
-        savehistories.add(ac);
-        savehistories.add(ad);
-        savehistories.add(ae);
-        savehistories.add(af);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -205,8 +195,7 @@ public class MainActivity extends AppCompatActivity {
                 resultView.setText(finalResult);
             }
         }
-
-
+    }
     public void lichsu(View view) {
         Intent myIntent = new Intent(view.getContext(), save_history
                 .class);
