@@ -27,7 +27,7 @@ public class save_history extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save_history);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        //actionBar.setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE");
         savekqArrayList = (ArrayList<savekq>) args.getSerializable("ARRAYLIST");
