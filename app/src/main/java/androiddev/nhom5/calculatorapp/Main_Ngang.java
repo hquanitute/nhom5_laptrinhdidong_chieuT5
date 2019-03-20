@@ -1,16 +1,10 @@
 package androiddev.nhom5.calculatorapp;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Display;
-import android.view.OrientationEventListener;
-import android.view.Surface;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -22,18 +16,21 @@ import java.util.List;
 
 import nguyenvanquan7826.com.Balan;
 
-public class MainActivity extends AppCompatActivity {
+public class Main_Ngang extends AppCompatActivity {
+
     Button button0, button1, button2, button3, button4, button5, button6,
             button7, button8, button9, buttonAdd, buttonSub, buttonDiv,
-            buttonMul, buttonMínus, buttonCE, buttonAC, buttonEqual,buttonPi,buttonLeftBrack,buttonRightBrack,buttonExpone,
+            buttonMul, buttonMinus, buttonCE, buttonAC, buttonEqual,buttonPi,buttonLeftBrack,buttonRightBrack,buttonExpone,
             buttonDot, buttonPercent, buttonSqrt, buttonSqr, buttonFraction,buttonDel,buttonSin,buttonCos,buttonTan,buttonStage;
     ImageButton buttonhis;
-    OrientationEventListener myOrientationEventListener;
+
     TextView resultView, expressionView;
+
     double mValueOne, mValueTwo;
     List<savekq> savehistories = new ArrayList<savekq>();
     public static final int MY_REQUEST_CODE = 100;
     savekq kqtrave;
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -45,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        CheckRotation();
         button0 = findViewById(R.id.button0);
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
@@ -64,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         buttonAC = findViewById(R.id.buttonAC);
         buttonDel = findViewById(R.id.buttonDel);
         buttonDot = findViewById(R.id.buttonDot);
-        buttonMínus = findViewById(R.id.buttonMinus);
+        buttonMinus = findViewById(R.id.buttonMinus);
         buttonPercent = findViewById(R.id.buttonPer);
         buttonStage = findViewById(R.id.buttonStage);
         buttonExpone=findViewById(R.id.buttonExpon);
@@ -103,12 +99,23 @@ public class MainActivity extends AppCompatActivity {
             resultView.setText(savedInstanceState.getString("result"));
             expressionView.setText(savedInstanceState.getString("expression"));
         }
-//        buttonSqrt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                expressionView.setText(expressionView.getText()+"");
-//            }
-//        });
+        buttonMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expressionView.setText(expressionView.getText()+"(-");
+            }
+        });
+        buttonSqrt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expressionView.setText(expressionView.getText()+"√(");
+//                char[] expression = expressionView.getText().toString().trim().toCharArray();
+//                String temp = expressionView.getText().toString().trim();
+//                for(int i=0;i<expression.length;i++)
+//                    if(expression[i]=='√')
+//                        resultView.setText(resultView.getText()+Math.sqrt(expression[i+1]));
+            }
+        });
         buttonAC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,66 +123,60 @@ public class MainActivity extends AppCompatActivity {
                 expressionView.setText("");
             }
         });
-//        buttonStage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                expressionView.setText(expressionView.getText()+"!");
-//            }
-//        });
-//        buttonRightBrack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                expressionView.setText(expressionView.getText()+")");
-//            }
-//        });
-//        buttonExpone.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                expressionView.setText(expressionView.getText()+"^");
-//            }
-//        });
-//        buttonLeftBrack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                expressionView.setText(expressionView.getText()+"(");
-//            }
-//        });
-//        buttonPercent.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                expressionView.setText(expressionView.getText()+"%");
-//            }
-//        });
-//        buttonSin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                expressionView.setText(expressionView.getText()+"sin(");
-//            }
-//        });
-//        buttonCos.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                expressionView.setText(expressionView.getText()+"cos(");
-//            }
-//        });
-//        buttonTan.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                expressionView.setText(expressionView.getText()+"tan(");
-//            }
-//        });
-//        buttonSqrt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                expressionView.setText(expressionView.getText()+"\u221A");
-//            }
-//        });
-//      buttonPi.setOnClickListener(new View.OnClickListener() {
-//         @Override
-//          public void onClick(View v) {
-//             expressionView.setText(expressionView.getText()+"π");
-//           }
-//       });
+        buttonStage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expressionView.setText(expressionView.getText()+"!");
+            }
+        });
+        buttonRightBrack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expressionView.setText(expressionView.getText()+")");
+            }
+        });
+        buttonExpone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expressionView.setText(expressionView.getText()+"^");
+            }
+        });
+        buttonLeftBrack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expressionView.setText(expressionView.getText()+"(");
+            }
+        });
+        buttonPercent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expressionView.setText(expressionView.getText()+"%");
+            }
+        });
+        buttonSin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expressionView.setText(expressionView.getText()+"sin(");
+            }
+        });
+        buttonCos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expressionView.setText(expressionView.getText()+"cos(");
+            }
+        });
+        buttonTan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expressionView.setText(expressionView.getText()+"tan(");
+            }
+        });
+      buttonPi.setOnClickListener(new View.OnClickListener() {
+         @Override
+          public void onClick(View v) {
+             expressionView.setText(expressionView.getText()+"π");
+           }
+       });
         buttonDot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -206,23 +207,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    void CheckRotation(){
-        myOrientationEventListener = new OrientationEventListener(this, SensorManager.SENSOR_DELAY_NORMAL) {
-            @Override
-            public void onOrientationChanged(int orientation) {
-                Display display =((WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-                if(display.getRotation()==Surface.ROTATION_90)
-                {
-                    intentScreen();
-                }
-            }
-        };
-    }
-    public void intentScreen()
-    {
-        Intent intent = new Intent(this,Main_Ngang.class);
-        this.startActivity(intent);
-    }
     protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == MY_REQUEST_CODE) {
             Bundle args = data.getBundleExtra("bundle");
@@ -232,42 +216,60 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
     private void cal() {
         char[] expression = expressionView.getText().toString().trim().toCharArray();
         String temp = expressionView.getText().toString().trim();
-        for (int i = 0; i < expression.length; i++) {
+        boolean flat = false;
+        int k = expression.length;
+//        String a = "Math.sqrt";
+        for (int i = 0; i < k; i++) {
             if (expression[i] == '\u00D7')
                 expression[i] = '*';
             if (expression[i] == '\u00f7')
                 expression[i] = '/';
-        }
-        if (expression.length > 0) {
-            Balan balan = new Balan();
-            double realResult = balan.valueMath(String.copyValueOf(expression));
-            int naturalResult;
-            String finalResult;
-            if (realResult % 1 == 0) {
-                naturalResult = (int) Math.round(realResult);
-                finalResult = String.valueOf(naturalResult);
+        for(int j =0 ;j<k;j++)
+        {
+            if(expression[j]=='√')
+            {
+                flat = true;
+                expression[j] = expression[j+1];
+                k--;
             }
-            else
-                finalResult = String.valueOf(realResult);
-            String error = balan.getError();
+            if(flat==true && expression[j]==')')
+            {
+                flat = false;
+                for(int x =j+1;x<k;x++)
+                {
+                    expression[x]=expression[x-1];
+                }
+                expression[j]='²';
+            }
+        }
 
-            // check error
-            if (error != null) {
-                resultView.setText(error);
-            } else { // show result
-                expressionView.setText(temp);
-                resultView.setText(finalResult);
+            if (expression.length > 0) {
+                Balan balan = new Balan();
+                double realResult = balan.valueMath(String.copyValueOf(expression));
+                int naturalResult;
+                String finalResult;
+                if (realResult % 1 == 0) {
+                    naturalResult = (int) Math.round(realResult);
+                    finalResult = String.valueOf(naturalResult);
+                } else
+                    finalResult = String.valueOf(realResult);
+                String error = balan.getError();
+
+                // check error
+                if (error != null) {
+                    resultView.setText(error);
+                } else { // show result
+                    expressionView.setText(temp);
+                    resultView.setText(finalResult);
+                }
             }
         }
+
+
     }
-
-
-
-
     public void lichsu(View view) {
        /* savekq ab = new savekq("1+2",3);
         savekq ac = new savekq("1+2",4);

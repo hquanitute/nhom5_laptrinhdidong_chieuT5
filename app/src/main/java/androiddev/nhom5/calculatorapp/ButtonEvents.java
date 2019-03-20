@@ -13,6 +13,7 @@ public class ButtonEvents {
                     tView.setText(button.getText());
                 else
                     tView.setText(tView.getText().toString() + button.getText());
+
             }
         });
     }
