@@ -20,10 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
     Button button0, button1, button2, button3, button4, button5, button6,
             button7, button8, button9, buttonAdd, buttonSub, buttonDiv,
-            buttonMul, buttonMínus, buttonC, buttonAC, buttonEqual,buttonPi,buttonLeftBrack,buttonRightBrack,
-            buttonDot, buttonPercent, buttonSqrt, buttonSqr, buttonFraction,buttonDel;
-           
-    ImageButton buttonDel,buttonhis;
+            buttonMul, buttonMínus, buttonC, buttonAC, buttonEqual, buttonPi, buttonLeftBrack, buttonRightBrack,
+            buttonDot, buttonPercent, buttonSqrt, buttonSqr, buttonFraction, buttonDel;
+    ImageButton buttonhis;
 
     TextView resultView, expressionView;
 
@@ -35,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("result",resultView.getText().toString());
-        outState.putString("expression",expressionView.getText().toString());
+        outState.putString("result", resultView.getText().toString());
+        outState.putString("expression", expressionView.getText().toString());
     }
 
     @Override
@@ -66,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
         buttonSqr = findViewById(R.id.buttonSqr);
         buttonSqrt = findViewById(R.id.buttonSqrt);
         // buttonFraction = findViewById(R.id.buttonFrac);
-        buttonPi=findViewById(R.id.buttonPi);
+        buttonPi = findViewById(R.id.buttonPi);
         buttonEqual = findViewById(R.id.buttonEqual);
-        buttonLeftBrack=findViewById(R.id.buttonLeftBrack);
-        buttonRightBrack=findViewById(R.id.buttonRightBrack);
+        buttonLeftBrack = findViewById(R.id.buttonLeftBrack);
+        buttonRightBrack = findViewById(R.id.buttonRightBrack);
         resultView = findViewById(R.id.resultView);
         expressionView = findViewById(R.id.expressionView);
         buttonhis = findViewById(R.id.buttonhis);
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         btnEvent.ClickOnNumberButton(buttonSub, expressionView);
         btnEvent.ClickOnNumberButton(buttonDiv, expressionView);
         btnEvent.ClickOnNumberButton(buttonMul, expressionView);
-        if(savedInstanceState!=null) {
+        if (savedInstanceState != null) {
             resultView.setText(savedInstanceState.getString("result"));
             expressionView.setText(savedInstanceState.getString("expression"));
         }
@@ -135,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String expression = expressionView.getText().toString();
-                if(expression.length() != 1)
+                if (expression.length() != 1)
                     expression = expression.substring(0, expression.length() - 1);
                 else expression = "0";
                 expressionView.setText(expression);
@@ -149,11 +148,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == MY_REQUEST_CODE) {
             Bundle args = data.getBundleExtra("bundle");
-            kqtrave =(savekq) args.getSerializable("kqtrave");
-        } else{
+            kqtrave = (savekq) args.getSerializable("kqtrave");
+        } else {
 
         }
 
@@ -176,8 +176,7 @@ public class MainActivity extends AppCompatActivity {
             if (realResult % 1 == 0) {
                 naturalResult = (int) Math.round(realResult);
                 finalResult = String.valueOf(naturalResult);
-            }
-            else
+            } else
                 finalResult = String.valueOf(realResult);
             String error = balan.getError();
 
@@ -189,7 +188,6 @@ public class MainActivity extends AppCompatActivity {
                 resultView.setText(finalResult);
             }
         }
-    }
 
 }
 
