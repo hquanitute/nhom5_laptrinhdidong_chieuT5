@@ -40,7 +40,7 @@
     <TextView
         android:id="@+id/expressionView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
         android:textAlignment="viewEnd"
         android:textColor="@android:color/background_light"
         android:textSize="25sp" />
@@ -48,7 +48,9 @@
     <TextView
         android:id="@+id/resultView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="67dp"
+        android:ellipsize="none"
+        android:singleLine="true"
         android:text="0"
         android:textAlignment="viewEnd"
         android:textColor="@android:color/background_light"
@@ -57,6 +59,7 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -73,32 +76,31 @@
                 android:textSize="25sp" />
 
             <Button
-                android:textColor="#FFFFFF"
-                android:id="@+id/buttonAC"
-                android:layout_height="match_parent"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/gray_circle_button"
-                android:text="AC"
-                android:textSize="25sp" />
-
-            <Button
-                android:textColor="#FFFFFF"
-                android:id="@+id/buttonDel"
+                android:id="@+id/buttonC"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button"
                 android:text="C"
                 android:textSize="25sp" />
+
+            <ImageButton
+                android:id="@+id/buttonDel"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/gray_circle_button"
+                app:srcCompat="@drawable/backspace" />
+
             <Button
-                android:textColor="#FFFFFF"
                 android:id="@+id/buttonDiv"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button"
+                android:onClick="onOperatorButtonClick"
                 android:text="\u00f7"
+                android:textColor="#FFFFFF"
                 android:textSize="25sp" />
         </TableRow>
 
@@ -114,6 +116,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="7"
                 android:textSize="25sp" />
 
@@ -124,6 +127,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="8"
                 android:textSize="25sp" />
 
@@ -134,6 +138,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="9"
                 android:textSize="25sp" />
 
@@ -144,6 +149,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button"
+                android:onClick="onOperatorButtonClick"
                 android:text="\u00D7"
                 android:textSize="25sp" />
         </TableRow>
@@ -160,6 +166,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="4"
                 android:textSize="25sp" />
 
@@ -170,6 +177,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="5"
                 android:textSize="25sp" />
 
@@ -180,6 +188,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="6"
                 android:textSize="25sp" />
 
@@ -190,6 +199,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button"
+                android:onClick="onOperatorButtonClick"
                 android:text="\u002d"
                 android:textSize="25sp" />
         </TableRow>
@@ -206,6 +216,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="1"
                 android:textSize="25sp" />
 
@@ -216,6 +227,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="2"
                 android:textSize="25sp" />
 
@@ -226,6 +238,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="3"
                 android:textSize="25sp" />
 
@@ -236,6 +249,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button"
+                android:onClick="onOperatorButtonClick"
                 android:text="+"
                 android:textSize="25sp" />
         </TableRow>
@@ -262,6 +276,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="0"
                 android:textSize="25sp" />
 
@@ -282,6 +297,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button"
+                android:onClick="onOperatorButtonClick"
                 android:text="="
                 android:textSize="25sp" />
         </TableRow>
