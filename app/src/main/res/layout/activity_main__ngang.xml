@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/horizontalScreen"
+
     android:background="#1C1C1C"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -44,6 +44,7 @@
             android:textAlignment="textEnd"
             android:textColor="#FFFFFF"
             android:textSize="25dp"
+            android:text="hello"
             android:maxLength="15"/>
 
         <TextView
