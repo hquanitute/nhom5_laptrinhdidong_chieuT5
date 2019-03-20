@@ -10,7 +10,7 @@
         android:supportsRtl="true"
 
 
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".save_history"
             android:parentActivityName=".MainActivity"/>
         <activity android:name=".HistoryActivity" />
