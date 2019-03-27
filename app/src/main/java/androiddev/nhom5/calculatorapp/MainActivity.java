@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.InvocationTargetException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<savekq> list = new ArrayList<>();
 
     TextView resultView, expressionView;
-    private boolean mIsCalculating = false, mIsTyping = false;
-    private double result = 0;
+    private boolean mIsCalculating = false, mIsTyping = false, mIsError = false, mIsMulDiv = false;
+    private double result = 0, tempResult = 0;
 
     public void onNumberButtonClick(View view) {
         Button b = (Button) view;
@@ -87,16 +88,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                     expressionView.setText(expressionView.getText().toString()
                             .substring(0, expressionView.getText().toString().length() - 1));
-
-                    savekq kq = new savekq(expressionView.getText().toString(), Double.valueOf(resultView.getText().toString()));
-                    Writehistory(list, kq);
+                    savekq kq;
+                    if (!mIsError) {
+                        kq = new savekq(expressionView.getText().toString(), Double.valueOf(resultView.getText().toString()));
+                        Writehistory(list, kq);
+                    }
                     mIsTyping = false;
                     mIsCalculating = false;
                     result = 0;
                     break;
             }
         }
-    }
+}
 
     public void onAddButtonClick(View view) {
         DecimalFormat df = new DecimalFormat("#.#############");
@@ -130,6 +133,8 @@ public class MainActivity extends AppCompatActivity {
     public void onMulButtonClick(View view) {
         DecimalFormat df = new DecimalFormat("#.#############");
         Button b = (Button) view;
+        if(!mIsMulDiv) tempResult = Double.valueOf(resultView.getText().toString());
+        else
         if (mIsTyping == true) {
             expressionView.setText(expressionView.getText() + " " + resultView.getText() + " " + b.getText());
             result = result * Double.valueOf(resultView.getText().toString());
@@ -146,7 +151,16 @@ public class MainActivity extends AppCompatActivity {
         Button b = (Button) view;
         if (mIsTyping == true) {
             expressionView.setText(expressionView.getText() + " " + resultView.getText() + " " + b.getText());
-            result = result / Double.valueOf(resultView.getText().toString());
+            try {
+                result = result / Double.valueOf(resultView.getText().toString());
+                if (result == Double.POSITIVE_INFINITY ||
+                        result == Double.NEGATIVE_INFINITY)
+                    throw new ArithmeticException();
+            } catch (ArithmeticException e) {
+                resultView.setText("Syntax Error");
+                mIsError = true;
+                return;
+            }
             if (result % 1 == 0)
                 resultView.setText(String.valueOf((int) result));
             else resultView.setText(String.valueOf(df.format(result)));
@@ -311,80 +325,84 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonDel(View v) {
-        String expression = resultView.getText().toString();
-        if (expression.length() > 2)
-            expression = expression.substring(0, expression.length() - 1);
-        else if(expression.length() == 2  && !expression.substring(0, 1).equals("-"))
-            expression = expression.substring(0, expression.length() - 1);
-        else {
-            expression = "0";
-            mIsTyping = false;
-        }
-        resultView.setText(expression);
-    }
-
-    public void buttonMinus(View v) {
-        if(mIsTyping) {
-            if (!resultView.getText().toString().equals("0"))
-                if (resultView.getText().toString().substring(0, 1).equals("-"))
-                    resultView.setText(resultView.getText().toString().substring(1));
-                else
-                    resultView.setText("-" + resultView.getText());
+        {
+            String expression = resultView.getText().toString();
+            if (expression != "Syntax Error") {
+                if (expression.length() > 2)
+                    expression = expression.substring(0, expression.length() - 1);
+                else if (expression.length() == 2 && !expression.substring(0, 1).equals("-"))
+                    expression = expression.substring(0, expression.length() - 1);
+                else {
+                    expression = "0";
+                    mIsTyping = false;
+                }
+                resultView.setText(expression);
+            }
         }
     }
 
-    public void buttonStage(View v) {
-        expressionView.setText(expressionView.getText() + "!");
-    }
+        public void buttonMinus (View v){
+            if (mIsTyping) {
+                if (!resultView.getText().toString().equals("0"))
+                    if (resultView.getText().toString().substring(0, 1).equals("-"))
+                        resultView.setText(resultView.getText().toString().substring(1));
+                    else
+                        resultView.setText("-" + resultView.getText());
+            }
+        }
+
+        public void buttonStage (View v){
+            expressionView.setText(expressionView.getText() + "!");
+        }
 
 
-    public void buttonExpone(View v) {
-        expressionView.setText(expressionView.getText() + "^");
-    }
+        public void buttonExpone (View v){
+            expressionView.setText(expressionView.getText() + "^");
+        }
 
 
-    public void buttonPercent(View v) {
-        expressionView.setText(expressionView.getText() + "%");
-    }
+        public void buttonPercent (View v){
+            expressionView.setText(expressionView.getText() + "%");
+        }
 
 
-    public void buttonSin(View v) {
-        expressionView.setText(expressionView.getText() + "sin(");
-    }
+        public void buttonSin (View v){
+            expressionView.setText(expressionView.getText() + "sin(");
+        }
 
 
-    public void buttonCos(View v) {
-        expressionView.setText(expressionView.getText() + "cos(");
-    }
+        public void buttonCos (View v){
+            expressionView.setText(expressionView.getText() + "cos(");
+        }
 
 
-    public void buttonTan(View v) {
-        expressionView.setText(expressionView.getText() + "tan(");
-    }
+        public void buttonTan (View v){
+            expressionView.setText(expressionView.getText() + "tan(");
+        }
 
 
-    //--------------------------------------------------------------------------
-    public void lichsu(View view) {
-        Intent myIntent = new Intent(view.getContext(), save_history
-                .class);
-        Bundle args = new Bundle();
-        args.putSerializable("ARRAYLIST", (Serializable) list);
-        myIntent.putExtra("BUNDLE", args);
-        this.startActivityForResult(myIntent, MY_REQUEST_CODE);
-    }
+        //--------------------------------------------------------------------------
+        public void lichsu (View view){
+            Intent myIntent = new Intent(view.getContext(), save_history
+                    .class);
+            Bundle args = new Bundle();
+            args.putSerializable("ARRAYLIST", (Serializable) list);
+            myIntent.putExtra("BUNDLE", args);
+            this.startActivityForResult(myIntent, MY_REQUEST_CODE);
+        }
 
-    private void Writehistory(List list, savekq savehistory) {
-        if (kiemtrasopt(list) < 5) {
-            list.add(0, savehistory);
-        } else {
-            list.remove(4);
-            list.add(0, savehistory);
+        private void Writehistory (List list, savekq savehistory){
+            if (kiemtrasopt(list) < 5) {
+                list.add(0, savehistory);
+            } else {
+                list.remove(4);
+                list.add(0, savehistory);
+            }
+        }
+
+        private int kiemtrasopt (List list){
+            int dem = list.size();
+            return dem;
         }
     }
-
-    private int kiemtrasopt(List list) {
-        int dem = list.size();
-        return dem;
-    }
-}
 

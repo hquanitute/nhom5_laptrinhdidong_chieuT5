@@ -144,7 +144,6 @@
                 android:textSize="25sp" />
 
             <Button
-                android:textColor="#FFFFFF"
                 android:id="@+id/buttonMul"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
@@ -152,6 +151,7 @@
                 android:background="@drawable/orange_circle_button"
                 android:onClick="onOperatorButtonClick"
                 android:text="\u00D7"
+                android:textColor="#FFFFFF"
                 android:textSize="25sp" />
         </TableRow>
 
@@ -194,7 +194,6 @@
                 android:textSize="25sp" />
 
             <Button
-                android:textColor="#FFFFFF"
                 android:id="@+id/buttonSub"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
@@ -202,6 +201,7 @@
                 android:background="@drawable/orange_circle_button"
                 android:onClick="onOperatorButtonClick"
                 android:text="\u002d"
+                android:textColor="#FFFFFF"
                 android:textSize="25sp" />
         </TableRow>
 
