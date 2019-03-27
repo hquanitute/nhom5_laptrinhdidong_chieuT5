@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +43,10 @@ public class MainActivity extends AppCompatActivity {
                 expressionView.setText(resultView.getText().toString() + " " + b.getText());
                 mIsTyping = false;
                 mIsCalculating = true;
-            } else if (mIsTyping == true)
+            } else if (mIsTyping == true) {
                 expressionView.setText((resultView.getText().toString()));
+                mIsTyping = false;
+            }
         } else {
             String a = expressionView.getText().toString()
                     .substring(expressionView.getText().toString().length() - 1);
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     expressionView.setText(expressionView.getText().toString()
                             .substring(0, expressionView.getText().toString().length() - 1));
 
-                    savekq kq = new savekq(expressionView.getText().toString(), Long.valueOf(resultView.getText().toString()));
+                    savekq kq = new savekq(expressionView.getText().toString(), Double.valueOf(resultView.getText().toString()));
                     Writehistory(list, kq);
                     mIsTyping = false;
                     mIsCalculating = false;
@@ -96,13 +99,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onAddButtonClick(View view) {
+        DecimalFormat df = new DecimalFormat("#.#############");
         Button b = (Button) view;
         if (mIsTyping == true) {
             expressionView.setText(expressionView.getText() + " " + resultView.getText() + " " + b.getText());
             result = result + Double.valueOf(resultView.getText().toString());
             if (result % 1 == 0)
                 resultView.setText(String.valueOf((int) result));
-            else resultView.setText(String.valueOf(result));
+            else resultView.setText(String.valueOf(df.format(result)));
         } else
             expressionView.setText(expressionView.getText().toString()
                     .substring(0, expressionView.getText().toString().length() - 1) + b.getText());
@@ -110,39 +114,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSubButtonClick(View view) {
+        DecimalFormat df = new DecimalFormat("#.#############");
         Button b = (Button) view;
         if (mIsTyping == true) {
             expressionView.setText(expressionView.getText() + " " + resultView.getText() + " " + b.getText());
             result = result - Double.valueOf(resultView.getText().toString());
             if (result % 1 == 0)
                 resultView.setText(String.valueOf((int) result));
-            else resultView.setText(String.valueOf(result));
+            else resultView.setText(String.valueOf(df.format(result)));
         } else
             expressionView.setText(expressionView.getText().toString()
                     .substring(0, expressionView.getText().toString().length() - 1) + b.getText());
     }
 
     public void onMulButtonClick(View view) {
+        DecimalFormat df = new DecimalFormat("#.#############");
         Button b = (Button) view;
         if (mIsTyping == true) {
             expressionView.setText(expressionView.getText() + " " + resultView.getText() + " " + b.getText());
             result = result * Double.valueOf(resultView.getText().toString());
             if (result % 1 == 0)
                 resultView.setText(String.valueOf((int) result));
-            else resultView.setText(String.valueOf(result));
+            else resultView.setText(String.valueOf(df.format(result)));
         } else
             expressionView.setText(expressionView.getText().toString()
                     .substring(0, expressionView.getText().toString().length() - 1) + b.getText());
     }
 
     public void onDivButtonClick(View view) {
+        DecimalFormat df = new DecimalFormat("#.#############");
         Button b = (Button) view;
         if (mIsTyping == true) {
             expressionView.setText(expressionView.getText() + " " + resultView.getText() + " " + b.getText());
             result = result / Double.valueOf(resultView.getText().toString());
             if (result % 1 == 0)
                 resultView.setText(String.valueOf((int) result));
-            else resultView.setText(String.valueOf(result));
+            else resultView.setText(String.valueOf(df.format(result)));
         } else
             expressionView.setText(expressionView.getText().toString()
                     .substring(0, expressionView.getText().toString().length() - 1) + b.getText());
@@ -210,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK && requestCode == MY_REQUEST_CODE) {
             Bundle args = data.getBundleExtra("bundle");
             kqtrave = (savekq) args.getSerializable("kqtrave");
-            resultView.setText(Long.toString(kqtrave.ketqua));
+            resultView.setText(Double.toString(kqtrave.ketqua));
             expressionView.setText(kqtrave.bieuthu);
         } else {
             Toast.makeText(this, "ko co gi", Toast.LENGTH_LONG).show();
@@ -254,6 +261,9 @@ public class MainActivity extends AppCompatActivity {
     public void buttonC(View view) {
         resultView.setText("0");
         expressionView.setText("");
+        mIsTyping = false;
+        mIsCalculating = false;
+        result = 0;
     }
 
     public void buttonAC(View view) {
@@ -270,7 +280,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonDot(View view) {
-        resultView.setText(resultView.getText() + ".");
+        boolean dot = false;
+        char[] expression = resultView.getText().toString().trim().toCharArray();
+        for (int i = 0; i < expression.length; i++) {
+            if (expression[i] == '.')
+                dot = true;
+        }
+        if (!dot)
+            resultView.setText(resultView.getText() + ".");
         mIsTyping = true;
     }
 
@@ -295,7 +312,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void buttonDel(View v) {
         String expression = resultView.getText().toString();
-        if (expression.length() != 1)
+        if (expression.length() > 2)
+            expression = expression.substring(0, expression.length() - 1);
+        else if(expression.length() == 2  && !expression.substring(0, 1).equals("-"))
             expression = expression.substring(0, expression.length() - 1);
         else {
             expression = "0";
@@ -305,11 +324,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonMinus(View v) {
-        if (!resultView.getText().toString().equals("0"))
-            if (resultView.getText().toString().substring(0, 1).equals("-"))
-                resultView.setText(resultView.getText().toString().substring(1));
-            else
-                resultView.setText("-" + resultView.getText());
+        if(mIsTyping) {
+            if (!resultView.getText().toString().equals("0"))
+                if (resultView.getText().toString().substring(0, 1).equals("-"))
+                    resultView.setText(resultView.getText().toString().substring(1));
+                else
+                    resultView.setText("-" + resultView.getText());
+        }
     }
 
     public void buttonStage(View v) {
