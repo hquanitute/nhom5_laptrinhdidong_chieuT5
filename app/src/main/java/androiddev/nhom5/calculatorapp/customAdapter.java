@@ -44,7 +44,7 @@ public class customAdapter extends ArrayAdapter<savekq> {
 
         savekq savekq = arrkq.get(position);
         viewHolder.tv_bieuthuc.setText(savekq.getBieuthu()+"=");
-        viewHolder.tv_ketqua.setText(Long.toString(savekq.getKetqua()));
+        viewHolder.tv_ketqua.setText(Double.toString(savekq.getKetqua()));
         return convertView;
     }
     public class ViewHolder {

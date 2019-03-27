@@ -65,7 +65,6 @@
             android:layout_weight="1">
 
             <Button
-                android:textColor="#FFFFFF"
                 android:id="@+id/buttonCE"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
