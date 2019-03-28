@@ -25,21 +25,35 @@ public class MainActivity extends AppCompatActivity {
     TextView resultView, expressionView;
     private double result = 0;
     private String expression;
+    private boolean isOperator = false;
+
     public void onNumberButtonClick(View view) {
        try {
            Button b = (Button) view;
            expressionView.setText(expressionView.getText().toString() + b.getText());
            calculate();
+           isOperator=false;
        }catch (Exception e)
        {
 
        }
     }
     public void onOperatorButtonClick(View v) {
+
       try {
-          Button b = (Button) v;
-          expressionView.setText(expressionView.getText().toString() + " " + b.getText() + " ");
-          //calculate();
+          checkOperator(expressionView);
+          if(isOperator==false) {
+              Button b = (Button) v;
+              expressionView.setText(expressionView.getText().toString()+ b.getText());
+              isOperator = true;
+          }
+          else
+          {
+              Button b = (Button) v;
+              expressionView.setText(expressionView.getText().toString().trim()
+                      .substring(0,expressionView.getText().toString().length()-1) + b.getText());
+              isOperator=true;
+          }
       }catch (Exception e){
 
       }
@@ -82,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
     //Thuat toan Banlan dung thu vien---------------------------------------------------
     private void calculate() {
        try {
@@ -93,9 +106,8 @@ public class MainActivity extends AppCompatActivity {
                    expression[i] = '*';
                if (expression[i] == '\u00f7')
                    expression[i] = '/';
-               if (expression[i] == '√') {
+               if (expression[i] == '√')
                    expression[i] = '²';
-               }
            }
            if (expression.length > 0) {
                Balan balan = new Balan();
@@ -110,10 +122,12 @@ public class MainActivity extends AppCompatActivity {
                String error = balan.getError();
                // check error
                if (error != null) {
-                   resultView.setText("null");
+                   resultView.setText(error);
 //                if(error == "String input math error!")
                    //expressionView.setText("");
-
+                    if(error.toString()=="Error div 0")
+                        //resultView.setText("0");
+                        expressionView.setText("Error");
                } else { // show result
                    expressionView.setText(temp);
                    resultView.setText(finalResult);
@@ -126,7 +140,10 @@ public class MainActivity extends AppCompatActivity {
        }
     }
 
-
+//    public void EnableEqual()
+//    {
+//
+//    }
     //Xu li dau AC --- Reset lai bieu thuc moi
     public void buttonAC(View view) {
         resultView.setText("0");
@@ -151,33 +168,88 @@ public class MainActivity extends AppCompatActivity {
         //resultView.setText(resultView.getText() + ".");
     }
     public void buttonMod(View view) {
-        expressionView.setText(expressionView.getText()+" Mod " );
+        expressionView.setText(expressionView.getText()+"Mod " );
         //resultView.setText(resultView.getText() + ".");
     }
     public void buttonMinus(View view)
     {
-        if (!expressionView.getText().toString().equals("0"))
-            if (expressionView.getText().toString().substring(0, 1).equals("-"))
+//        checkOperator(expressionView);
+//        String s=expressionView.getText().toString();
+//        int location= findOperator(expressionView);
+//        if(isOperator==false )
+//        {
+//            String digit=s.substring(location+1,s.length());
+//            expressionView.setText(expressionView.getText().toString().substring(0,location+1)+"-");
+//            expressionView.setText(expressionView.getText().toString()+digit);
+//        }
+        //-----------------------------------------
+//        if (!expressionView.getText().toString().equals("0"))
+//            if (expressionView.getText().toString().substring(0, expressionView.getText().charAt(expressionView.length()-1)).equals("-"))
+//            {
+//                expressionView.setText(expressionView.getText().toString().substring(1));
+//                calculate();
+//            }
+//            else {
+//                expressionView.setText("-" + expressionView.getText());
+//                calculate();
+//            }
+
+        expressionView.setText(expressionView.getText()+"(-");
+    }
+
+    public void checkOperator(TextView tv)
+    {
+        String s = tv.getText().toString().substring(tv.getText().length()-1);
+        if(s.equals(")") || s.equals("!")) {
+           int a=1;
+            isOperator = false;
+//            return;
+        }
+       else if(Character.isDigit(tv.getText().toString().charAt(tv.getText().toString().length()-1)))
+            isOperator=false;
+        else
+            isOperator=true;
+    }
+    public int findOperator (TextView tv)
+    {
+        String s=tv.getText().toString();
+        int length=tv.getText().length();
+        int location =-1;
+
+        for (int i=length-1;i>=0;i--)
+        {
+            if (!Character.isDigit(s.charAt(i)))
             {
-                expressionView.setText(expressionView.getText().toString().substring(1));
-                calculate();
+                location=i;
+                break;
             }
-            else {
-                expressionView.setText("-" + expressionView.getText());
-                calculate();
-            }
+        }
+
+        return location;
     }
 
     //Xu li dau =
     public void onResultClick(View v)
     {
-         savekq kq = new savekq(expressionView.getText().toString(), Double.valueOf(resultView.getText().toString()));
-    Writehistory(list, kq);
-        calculate();
+        try{
+            savekq kq = new savekq(expressionView.getText().toString(), Double.valueOf(resultView.getText().toString()));
+            Writehistory(list, kq);
+            calculate();
+            expressionView.setText(resultView.getText());
+            result=Double.valueOf(resultView.getText().toString());
+            resultView.setText("");
+        }catch (Exception e){
+                resultView.setText("0");
+                expressionView.setText("Cannot Divide");
+                result=0;
+        }
 
-        expressionView.setText(resultView.getText());
-        result=Double.valueOf(resultView.getText().toString());
-        resultView.setText("");
+    }
+    //Xu li dau !
+    public void buttonFactorial(View v)
+    {
+        expressionView.setText(expressionView.getText() + "!");
+        calculate();
     }
 
     //Xu li dau ")"
@@ -191,28 +263,55 @@ public class MainActivity extends AppCompatActivity {
     }
 //
 //    //Xu li dau √
-//    public void buttonSqrt(View v) {
-//        expressionView.setText(expressionView.getText() + "√(");
-//    }
+    public void buttonSqrt(View v) {
+        expressionView.setText(expressionView.getText() + "√(");
+    }
 //
 //    //Xu li dau π
-//    public void buttonPi(View v) {
-//        expressionView.setText(expressionView.getText() + "π");
-//    }
+    public void buttonPi(View v) {
+        expressionView.setText(expressionView.getText() + "π");
+    }
+
+     public boolean checkDel(TextView tv)
+     {
+         String s = expressionView.getText().toString();
+         for(int i=0;i<s.length();i++)
+         {
+             if(Character.isDigit(s.charAt(i)))
+             {
+                return true;
+             }
+         }
+         return  false;
+     }
 
     //Xu li dau C
     public void buttonC(View v) {
+
         try {
-            if (expressionView.length() != 0) {
-                expressionView.setText(expressionView.getText().toString()
-                        .substring(0, expressionView.getText().length() - 1));
-                calculate();
+            if(checkDel(expressionView)==false || expressionView.length()==1)
+            {
+                resultView.setText("0");
+                expressionView.setText("");
+                result=0;
             }
             else
             {
-                expressionView.setText("");
-                resultView.setText("0");
+                if (expressionView.length() != 0) {
+//                    checkOperator(expressionView.getText().toString().trim()
+//                            .substring(expressionView.getText().length(),expressionView.getText().length()));
+                    expressionView.setText(expressionView.getText().toString().trim()
+                            .substring(0, expressionView.getText().length() - 1));
+
+                    calculate();
+                }
+//                else
+//                {
+//
+//                    resultView.setText("0");
+//                }
             }
+
         } catch (Exception e) {
               // expressionView.setText("0");
         }
@@ -226,11 +325,33 @@ public class MainActivity extends AppCompatActivity {
 //    public void buttonStage(View v) {
 //        expressionView.setText(expressionView.getText() + "!");
 //    }
-
-    //Xu li dau mu
-//    public void buttonExpone(View v) {
-//        expressionView.setText(expressionView.getText() + "^");
+//-----------------------------------------------------------------
+//    //Tinh Tan
+//    public double TinhTan(Double a)
+//    {
+//        double Results =0;
+//        Results=Math.tan(Math.toRadians(a));
+//        return Results;
 //    }
+//    //Tinh Cos
+//    public double TinhCos(Double a)
+//    {
+//        double Results =0;
+//        Results=Math.cos(Math.toRadians(a));
+//        return Results;
+//    }
+//    //Tinh Sin
+//    public double TinhSin(Double a)
+//    {
+//        double Results =0;
+//        Results=Math.sin(Math.toRadians(a));
+//        return Results;
+//    }
+    //--------------------------------------------------------
+    //Xu li dau mu
+    public void buttonExpone(View v) {
+        expressionView.setText(expressionView.getText() + "^");
+    }
 
     //Xu li %
 //    public void buttonPercent(View v) {
@@ -239,17 +360,17 @@ public class MainActivity extends AppCompatActivity {
 
     //Xu li Sin
     public void buttonSin(View v) {
-        expressionView.setText(expressionView.getText() + "sin(");
+        expressionView.setText(expressionView.getText() + "sin");
     }
 
     //Xu li Cos
     public void buttonCos(View v) {
-        expressionView.setText(expressionView.getText() + "cos(");
+        expressionView.setText(expressionView.getText() + "cos");
     }
 
     //Xu li Tan
     public void buttonTan(View v) {
-        expressionView.setText(expressionView.getText() + "tan(");
+        expressionView.setText(expressionView.getText() + "tan");
     }
 
 
