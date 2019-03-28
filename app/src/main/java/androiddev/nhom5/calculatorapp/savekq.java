@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class savekq implements Serializable {
     String bieuthu;
-    long ketqua;
+    double ketqua;
 
-    public savekq(String bieuthu, long ketqua) {
+    public savekq(String bieuthu, double ketqua) {
         this.bieuthu = bieuthu;
         this.ketqua = ketqua;
     }
@@ -15,7 +15,7 @@ public class savekq implements Serializable {
         return bieuthu;
     }
 
-    public long getKetqua() {
+    public double getKetqua() {
         return ketqua;
     }
 
@@ -23,7 +23,7 @@ public class savekq implements Serializable {
         this.bieuthu = bieuthu;
     }
 
-    public void setKetqua(long ketqua) {
+    public void setKetqua(double ketqua) {
         this.ketqua = ketqua;
     }
 
