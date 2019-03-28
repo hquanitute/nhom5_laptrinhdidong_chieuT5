@@ -271,16 +271,6 @@ public class Main_Ngang extends AppCompatActivity {
 
     }
     public void lichsu(View view) {
-       /* savekq ab = new savekq("1+2",3);
-        savekq ac = new savekq("1+2",4);
-        savekq ad = new savekq("1+2",5);
-        savekq ae = new savekq("1+2",6);
-        savekq af = new savekq("1+2",7);
-        savehistories.add(ab);
-        savehistories.add(ac);
-        savehistories.add(ad);
-        savehistories.add(ae);
-        savehistories.add(af);*/
         Intent myIntent = new Intent(view.getContext(), save_history
                 .class);
         Bundle args = new Bundle();

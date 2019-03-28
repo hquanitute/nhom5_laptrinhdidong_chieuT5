@@ -40,7 +40,7 @@
     <TextView
         android:id="@+id/expressionView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:textAlignment="viewEnd"
         android:textColor="@android:color/background_light"
         android:textSize="25sp" />
@@ -48,7 +48,7 @@
     <TextView
         android:id="@+id/resultView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="68dp"
         android:text="0"
         android:textAlignment="viewEnd"
         android:textColor="@android:color/background_light"
@@ -73,7 +73,6 @@
                 android:textSize="25sp" />
 
             <Button
-                android:textColor="#FFFFFF"
                 android:id="@+id/buttonAC"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
@@ -83,15 +82,14 @@
                 android:text="C"
                 android:textSize="25sp" />
 
-            <Button
-                android:textColor="#FFFFFF"
+            <ImageButton
                 android:id="@+id/buttonDel"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button"
-                android:onClick="buttonDel"
-                app:srcCompat="@drawable/backspace" />
+                app:srcCompat="@drawable/backspace"
+                android:onClick="buttonDel"/>
 
             <Button
                 android:id="@+id/buttonDiv"
@@ -299,7 +297,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button"
-                android:onClick="onOperatorButtonClick"
+                android:onClick="Result"
                 android:text="="
                 android:textColor="#FFFFFF"
                 android:textSize="25sp" />
