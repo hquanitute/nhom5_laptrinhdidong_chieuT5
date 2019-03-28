@@ -2,30 +2,55 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="androiddev.nhom5.calculatorapp">
 
-    <application
+    <!--<application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--<activity android:name=".Main_Ngang"></activity>-->
-        <!--<activity-->
-            <!--android:name=".save_history"-->
-            <!--android:parentActivityName=".MainActivity" />-->
+        &lt;!&ndash;<activity android:name=".Main_Ngang"></activity>&ndash;&gt;
+        &lt;!&ndash;<activity&ndash;&gt;
+            &lt;!&ndash;android:name=".save_history"&ndash;&gt;
+            &lt;!&ndash;android:parentActivityName=".MainActivity" />&ndash;&gt;
 
         android:theme="@style/AppTheme">
         <activity android:name=".save_history"
             android:parentActivityName=".MainActivity"/>
 
         <activity android:name=".HistoryActivity" />
-        <activity android:name=".Main_Ngang">
+        <activity android:name=".MainActivity"/>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+    </application>-->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+
+
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".save_history"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".HistoryActivity" />
+
+
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
     </application>
+
 
 </manifest>
