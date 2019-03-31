@@ -228,11 +228,11 @@ public class MainActivity extends AppCompatActivity {
     public void onResultClick(View v)
     {
         try{
-            savekq kq = new savekq(expressionView.getText().toString(), Long.valueOf(resultView.getText().toString()));
+            savekq kq = new savekq(expressionView.getText().toString(), Double.valueOf(resultView.getText().toString()));
             Writehistory(list, kq);
             calculate();
             expressionView.setText(resultView.getText());
-            result=Long.valueOf(resultView.getText().toString());
+            result=Double.valueOf(resultView.getText().toString());
             resultView.setText("");
         }catch (Exception e){
             resultView.setText("0");
