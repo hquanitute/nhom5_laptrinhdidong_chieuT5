@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="350dp"
@@ -31,22 +32,27 @@
             android:src="@drawable/history"
             android:onClick="lichsu"/>
 
+        >
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/expressionView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
         android:textAlignment="viewEnd"
+        android:maxLength="30"
         android:textColor="@android:color/background_light"
-        android:textSize="30sp" />
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/resultView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="67dp"
+        android:ellipsize="none"
+        android:singleLine="true"
         android:text="0"
+        android:maxLength="9"
         android:textAlignment="viewEnd"
         android:textColor="@android:color/background_light"
         android:textSize="50sp" />
@@ -61,64 +67,26 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/buttonPer"
-                android:layout_height="match_parent"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/gray_circle_button"
-                android:text="%"
-                android:textSize="30sp" />
-
-            <Button
-                android:id="@+id/buttonSqrt"
-                android:layout_height="match_parent"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/gray_circle_button"
-                android:text="\u221A"
-                android:textSize="30sp" />
-
-            <Button
-                android:id="@+id/buttonSqr"
-                android:layout_height="match_parent"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/gray_circle_button"
-                android:text="\u2093\u00B2"
-                android:textSize="30sp" />
-
-            <Button
-                android:id="@+id/buttonFrac"
-                android:layout_height="match_parent"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/gray_circle_button"
-                android:text="\u215F\u2093"
-                android:textSize="30sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <Button
                 android:id="@+id/buttonCE"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button"
+                android:onClick="buttonCE"
                 android:text="CE"
-                android:textSize="30sp" />
+                android:textColor="#FFFFFF"
+                android:textSize="25sp" />
 
             <Button
-                android:id="@+id/buttonC"
+                android:id="@+id/buttonAC"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button"
-                android:text="C"
-                android:textSize="30sp" />
+                android:onClick="buttonAC"
+                android:textColor="#FFFFFF"
+                android:text="AC"
+                android:textSize="25sp" />
 
             <ImageButton
                 android:id="@+id/buttonDel"
@@ -126,6 +94,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button"
+                android:onClick="buttonC"
                 app:srcCompat="@drawable/backspace" />
 
             <Button
@@ -134,8 +103,10 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button"
+                android:onClick="onOperatorButtonClick"
                 android:text="\u00f7"
-                android:textSize="30sp" />
+                android:textColor="#FFFFFF"
+                android:textSize="25sp" />
         </TableRow>
 
         <TableRow
@@ -144,40 +115,48 @@
             android:layout_weight="1">
 
             <Button
+                android:textColor="#FFFFFF"
                 android:id="@+id/button7"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="7"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <Button
+                android:textColor="#FFFFFF"
                 android:id="@+id/button8"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="8"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <Button
+                android:textColor="#FFFFFF"
                 android:id="@+id/button9"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="9"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <Button
+                android:textColor="#FFFFFF"
                 android:id="@+id/buttonMul"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button"
+                android:onClick="onOperatorButtonClick"
                 android:text="\u00D7"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
         </TableRow>
 
         <TableRow
@@ -186,40 +165,48 @@
             android:layout_weight="1">
 
             <Button
+                android:textColor="#FFFFFF"
                 android:id="@+id/button4"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="4"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <Button
+                android:textColor="#FFFFFF"
                 android:id="@+id/button5"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="5"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <Button
+                android:textColor="#FFFFFF"
                 android:id="@+id/button6"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="6"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <Button
+                android:textColor="#FFFFFF"
                 android:id="@+id/buttonSub"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button"
+                android:onClick="onOperatorButtonClick"
                 android:text="\u002d"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
         </TableRow>
 
         <TableRow
@@ -228,31 +215,37 @@
             android:layout_weight="1">
 
             <Button
+                android:textColor="#FFFFFF"
                 android:id="@+id/button1"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="1"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <Button
+                android:textColor="#FFFFFF"
                 android:id="@+id/button2"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="2"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <Button
+                android:textColor="#FFFFFF"
                 android:id="@+id/button3"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="3"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/buttonAdd"
@@ -260,8 +253,10 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button"
+                android:onClick="onOperatorButtonClick"
                 android:text="+"
-                android:textSize="30sp" />
+                android:textColor="#FFFFFF"
+                android:textSize="25sp" />
         </TableRow>
 
         <TableRow
@@ -275,17 +270,21 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="buttonMinus"
                 android:text="\u00b1"
-                android:textSize="30sp" />
+                android:textColor="#FFFFFF"
+                android:textSize="25sp" />
 
             <Button
+                android:textColor="#FFFFFF"
                 android:id="@+id/button0"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="onNumberButtonClick"
                 android:text="0"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/buttonDot"
@@ -293,17 +292,21 @@
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button"
+                android:onClick="buttonDot"
                 android:text="\u00b7"
-                android:textSize="30sp" />
+                android:textColor="#FFFFFF"
+                android:textSize="25sp" />
 
             <Button
+                android:textColor="#FFFFFF"
                 android:id="@+id/buttonEqual"
                 android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button"
+                android:onClick="onResultClick"
                 android:text="="
-                android:textSize="30sp" />
+                android:textSize="25sp" />
         </TableRow>
     </TableLayout>
 

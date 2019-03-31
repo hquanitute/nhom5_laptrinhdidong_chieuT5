@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/horizontalScreen"
+
     android:background="#1C1C1C"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -41,10 +40,10 @@
             android:id="@+id/expressionView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
+            android:textAlignment="textStart"
             android:textColor="#FFFFFF"
-            android:textSize="25dp"
-            android:maxLength="15"/>
+            android:maxLength="60"
+            android:textSize="25dp" />
 
         <TextView
             android:layout_weight="1"
@@ -52,10 +51,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="0"
-            android:textAlignment="textEnd"
+            android:maxLength="9"
+            android:textAlignment="textStart"
             android:textColor="#FFFFFF"
-            android:textSize="32dp"
-            android:maxLength="15"/>
+            android:textSize="20dp"
+            />
 
         <LinearLayout
             android:layout_weight="1"
@@ -98,7 +98,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button_horizontal"
-                android:onClick="buttonStage"
+                android:onClick="buttonFactorial"
                 android:text="\u0021"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
@@ -322,7 +322,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button_horizontal"
-                android:onClick="buttonPercent"
+                android:onClick="onOperatorButtonClick"
                 android:text="%"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
@@ -402,15 +402,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="8">
-            <Button
-                android:textSize="20sp"
-                android:layout_weight="1"
-                android:id="@+id/buttonCot"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:background="@drawable/black_circle_button_horizontal"
-                android:text="cot"
-                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/buttonTan"
@@ -424,14 +415,28 @@
                 android:textSize="20sp" />
 
             <Button
+                android:id="@+id/buttonMod"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/black_circle_button_horizontal"
+                android:onClick="buttonMod"
+                android:text="Mod"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <Button
                 android:textSize="20sp"
-                android:layout_weight="2"
-                android:id="@+id/buttonAns"
+                android:layout_weight="1"
+                android:id="@+id/buttonLog"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/black_circle_button_horizontal"
-                android:text="ANS"
+                android:text="Log"
+                android:onClick="buttonLog"
                 android:textColor="#FFFFFF" />
 
             <Button
@@ -442,7 +447,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button_horizontal"
-                android:onClick="onOperatorButtonClick"
+                android:onClick="buttonMinus"
                 android:text="\u00b1"
                 android:textAlignment="gravity"
                 android:textColor="#FFFFFF"
@@ -483,7 +488,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button_horizontal"
-                android:onClick="onOperatorButtonClick"
+                android:onClick="onResultClick"
                 android:text="="
                 android:textAlignment="gravity"
                 android:textColor="#FFFFFF"
