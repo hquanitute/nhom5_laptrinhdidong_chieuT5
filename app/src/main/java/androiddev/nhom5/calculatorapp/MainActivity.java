@@ -21,11 +21,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<savekq> list = new ArrayList<>();
 
     TextView resultView, expressionView;
-    private double result = 0;
-    private boolean isOperator = false;
     private boolean mIsCalculating = false, mIsTyping = false, mIsError = false;
 
-    public void OnNumberButtonClick_land(View v) {
+    public void OnButtonClick_land(View v) {
         try {
             Button b = (Button) v;
             if (!mIsCalculating) {
@@ -199,18 +197,19 @@ public class MainActivity extends AppCompatActivity {
         //Xu li dau AC --- Reset lai bieu thuc moi
         public void buttonAC (View view){
             resultView.setText("0");
-            result = 0;
             expressionView.setText("");
-            result = 0;
+            mIsTyping = false;
+            mIsCalculating = false;
         }
 
         //Xu li dau CE --- Xoa ket qua resultView
         public void buttonCE (View view){
             resultView.setText("0");
-            result = 0;
+            mIsTyping = false;
+            mIsCalculating = true;
         }
 
-        //Xu li dau cham.
+        //Xu li dau cham
         public void buttonDot (View view){
             boolean dot = false;
             char[] expression = resultView.getText().toString().trim().toCharArray();
@@ -223,10 +222,6 @@ public class MainActivity extends AppCompatActivity {
             mIsTyping = true;
         }
 
-        public void buttonMod (View view){
-            resultView.setText(resultView.getText() + "Mod ");
-        }
-
         public void buttonMinus (View view){
             if (mIsTyping) {
                 if (!resultView.getText().toString().equals("0"))
@@ -237,164 +232,38 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        public void checkOperator (TextView tv){
-            String s = tv.getText().toString().substring(tv.getText().length() - 1);
-            if (s.equals(")") || s.equals("!")) {
-                int a = 1;
-                isOperator = false;
-//            return;
-            } else if (Character.isDigit(tv.getText().toString().charAt(tv.getText().toString().length() - 1)))
-                isOperator = false;
-            else
-                isOperator = true;
-        }
-
-
-        //Xu li dau =
-        public void onResultClick (View v){
-            try {
-                savekq kq = new savekq(expressionView.getText().toString(), Double.valueOf(resultView.getText().toString()));
-                Writehistory(list, kq);
-                calculate();
-                expressionView.setText(resultView.getText());
-                result = Double.valueOf(resultView.getText().toString());
-                resultView.setText("");
-            } catch (Exception e) {
-                resultView.setText("0");
-                expressionView.setText("Cannot Divide");
-                result = 0;
-            }
-
-        }
-
-        //Xu li dau !
-        public void buttonFactorial (View v){
-            resultView.setText(resultView.getText() + "!");
-        }
-
-        //Xu li dau ")"
-        public void buttonRightBrack (View v){
-            resultView.setText(resultView.getText() + ")");
-            mIsTyping=true;
-        }
-
-        //Xu li dau "("
-        public void buttonLeftBrack (View v){
-            resultView.setText(resultView.getText() + "(");
-            mIsTyping=true;
-        }
 
         //Xu li dau √
         public void buttonSqrt (View v){
-            resultView.setText(resultView.getText() + "√(");
-            mIsTyping=true;
-        }
-
-        //Xu li dau π
-        public void buttonPi (View v){
-            resultView.setText(resultView.getText() + "π");
-            mIsTyping=true;
-        }
-
-        public boolean checkDel (TextView tv){
-            String s = expressionView.getText().toString();
-            for (int i = 0; i < s.length(); i++) {
-                if (Character.isDigit(s.charAt(i))) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        //Xu li dau C
-        public void buttonC (View v){
-
             try {
-                if (checkDel(expressionView) == false || expressionView.length() == 1) {
-                    resultView.setText("0");
+                if (mIsCalculating == false)
                     expressionView.setText("");
-                    result = 0;
+                if (mIsTyping == false) {
+                    resultView.setText("√(");
+                    mIsTyping = true;
                 } else {
-                    if (expressionView.length() != 0) {
-//checkOperator(expressionView.getText().toString().trim()
-//                            .substring(expressionView.getText().length(),expressionView.getText().length()));
-                        expressionView.setText(expressionView.getText().toString().trim()
-                                .substring(0, expressionView.getText().length() - 1));
-
-                        calculate();
-                    }
-//                else
-//                {
-//
-//                    resultView.setText("0");
-//                }
+                    resultView.setText(resultView.getText().toString() + "√(");
                 }
-
             } catch (Exception e) {
-                // expressionView.setText("0");
+
             }
-            ;
         }
 
-        //Xu li log
-        public void buttonLog (View v){
-            resultView.setText(resultView.getText() + "log(");
-            mIsTyping=true;
-        }
-
-        //    //Xu li dau !
-//    public void buttonStage(View v) {
-//        expressionView.setText(expressionView.getText() + "!");
-//    }
-//-----------------------------------------------------------------
-//    //Tinh Tan
-//    public double TinhTan(Double a)
-//    {
-//        double Results =0;
-//        Results=Math.tan(Math.toRadians(a));
-//        return Results;
-//    }
-//    //Tinh Cos
-//    public double TinhCos(Double a)
-//    {
-//        double Results =0;
-//        Results=Math.cos(Math.toRadians(a));
-//        return Results;
-//    }
-//    //Tinh Sin
-//    public double TinhSin(Double a)
-//    {
-//        double Results =0;
-//        Results=Math.sin(Math.toRadians(a));
-//        return Results;
-//    }
         //--------------------------------------------------------
         //Xu li dau mu
         public void buttonExpone (View v){
-            resultView.setText(resultView.getText() + "^");
-        }
+            try {
+                if (mIsCalculating == false)
+                    expressionView.setText("");
+                if (mIsTyping == false) {
+                    resultView.setText("√(");
+                    mIsTyping = true;
+                } else {
+                    resultView.setText(resultView.getText().toString() + "^");
+                }
+            } catch (Exception e) {
 
-        //Xu li %
-//    public void buttonPercent(View v) {
-//        expressionView.setText(expressionView.getText() + "%");
-//    }
-
-        //Xu li Sin
-        public void buttonSin (View v){
-            resultView.setText(resultView.getText() + "sin");
-            mIsTyping=true;
-        }
-
-        //Xu li Cos
-        public void buttonCos (View v){
-            resultView.setText(resultView.getText() + "cos");
-            mIsTyping=true;
-        }
-
-        //Xu li Tan
-        public void buttonTan (View v){
-            resultView.setText(resultView.getText() + "tan");
-            mIsTyping=true;
+            }
         }
 
 
