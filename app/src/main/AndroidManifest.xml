@@ -38,7 +38,6 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".save_history"
             android:parentActivityName=".MainActivity"/>
-        <activity android:name=".HistoryActivity" />
 
 
         <activity android:name=".MainActivity">

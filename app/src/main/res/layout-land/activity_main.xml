@@ -73,7 +73,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnNumberButtonClick_land"
                 android:text="\u0028"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
@@ -86,7 +86,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnNumberButtonClick_land"
                 android:text="\u0029"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
@@ -99,7 +99,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="buttonFactorial"
                 android:text="\u0021"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
@@ -112,7 +112,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnNumberButtonClick_land"
                 android:text="7"
                 android:textColor="#000000"
                 android:textSize="20sp" />
@@ -125,7 +125,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnNumberButtonClick_land"
                 android:text="8"
                 android:textColor="#000000"
                 android:textSize="20sp" />
@@ -138,7 +138,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnNumberButtonClick_land"
                 android:text="9"
                 android:textColor="#000000"
                 android:textSize="20sp" />
@@ -149,7 +149,7 @@
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button"
-                android:onClick="ButtonDel"
+                android:onClick="buttonDel_land"
                 app:srcCompat="@android:drawable/ic_input_delete" />
 
             <Button
@@ -181,7 +181,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="buttonPi"
                 android:text="\u03A0"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
@@ -220,7 +220,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnNumberButtonClick_land"
                 android:text="4"
                 android:textColor="#000000"
                 android:textSize="20sp" />
@@ -233,7 +233,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnNumberButtonClick_land"
                 android:text="5"
                 android:textColor="#000000"
                 android:textSize="20sp" />
@@ -246,7 +246,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnNumberButtonClick_land"
                 android:text="6"
                 android:textColor="#000000"
                 android:textSize="20sp" />
@@ -294,7 +294,7 @@
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="buttonSin"
                 android:text="Sin"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
@@ -307,7 +307,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="buttonCos"
                 android:text="Cos"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
@@ -320,7 +320,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="buttonPercent"
                 android:text="%"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
@@ -333,7 +333,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnNumberButtonClick_land"
                 android:text="1"
                 android:textColor="#000000"
                 android:textSize="20sp" />
@@ -346,7 +346,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnNumberButtonClick_land"
                 android:text="2"
                 android:textColor="#000000"
                 android:textSize="20sp" />
@@ -359,7 +359,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnNumberButtonClick_land"
                 android:text="3"
                 android:textColor="#000000"
                 android:textSize="20sp" />
@@ -372,7 +372,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnOperatorButtonClick_land"
                 android:text="\u00D7"
                 android:textColor="#FFFFFF"
                 android:textSize="25sp" />
@@ -385,7 +385,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnOperatorButtonClick_land"
                 android:text="\u00f7"
                 android:textColor="#FFFFFF"
                 android:textSize="25sp" />
@@ -406,7 +406,7 @@
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="buttonTan"
                 android:text="tan"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
@@ -419,7 +419,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="buttonMod"
                 android:text="Mod"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
@@ -431,7 +431,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="buttonLog"
                 android:text="Log"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
@@ -444,7 +444,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button_horizontal"
-                android:onClick="buttonMinus"
+                android:onClick="buttonMinus_land"
                 android:text="\u00b1"
                 android:textAlignment="gravity"
                 android:textColor="#000000"
@@ -458,7 +458,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnNumberButtonClick_land"
                 android:text="0"
                 android:textAlignment="gravity"
                 android:textColor="#000000"
@@ -472,7 +472,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/gray_circle_button_horizontal"
-                android:onClick="buttonDot"
+                android:onClick="buttonDot_land"
                 android:text="."
                 android:textColor="#000000"
                 android:textSize="25sp" />
@@ -485,7 +485,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnOperatorButtonClick_land"
                 android:text="+"
                 android:textColor="#FFFFFF"
                 android:textSize="25sp" />
@@ -498,7 +498,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_circle_button_horizontal"
-                android:onClick="OnButtonClick_land"
+                android:onClick="OnOperatorButtonClick_land"
                 android:text="\u002d"
                 android:textColor="#FFFFFF"
                 android:textSize="25sp" />
